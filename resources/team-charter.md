@@ -70,14 +70,14 @@ The following guide might be helpful as you work through your teams charter:
 **What is personally important for each team member about becoming an SDE?**
 
 * _Team Member A_:
-* _Team Member B_:
+* Cliff: I want to be challenged and solve new problems. It is important to me to continue to learn new things and find new ways to solve problems.
 * _Team Member C_:
 * Tom: I've always enjoyed designing and building new solutions to difficult problems, and I find infrastructure puzzles to be particularly interesting. I'm hoping to find a role to let me explore that further.
 
 **What each team member wants to achieve: e.g. improve analytical skills, learn project management skills, develop public speaking skills, speak up more, speak up less, etc.**
 
 * _Team Member A_:
-* _Team Member B_:
+* Cliff: I aim to increase my ability to design and understand project architecture as well as increase my knowledge and skill in front-end development.
 * _Team Member C_:
 * Tom: I continue to be interested in understanding how to solve problems in sustainable, repeatable, extensible fashion rather than implementing a fast solution which won't be re-usable or even usable long-term.
 
@@ -98,6 +98,6 @@ _Presently, we think we have a comfortable collaborative balance without formall
 **I agree to the terms and conditions of these team agreements:**
 
 * _Team Member A_:
-* _Team Member B_:
+* _Cliff_
 * _Team Member C_:
 * Tom
