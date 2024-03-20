@@ -51,19 +51,19 @@ The following guide might be helpful as you work through your teams charter:
 ### Goals
 
 * **Overall: What is our overall objective for the Learn & Be Curious unit?**
-  We're excited to apply 
+  We're excited for the opportunity to take tools and techniques we've encountered in exercises and put them to use in scenarios with more opportunity for creativity.
 
 
 * **Performance: What do we want to prioritize in terms of what we achieve?**
-  _What will be true when you have 'succeeded' on this project? E.g. enjoy ourselves, maintain our energy to the end, ensure all team members participate, create professional connections, exceed instructor expectations, efficiently pace the project so we’re not rushing at the end, etc._
+ We've already discussed methods for reaching MVP. We've marked several good ideas 'stretch goals' - things to revisit if we have time.
 
 
 * **Learning: What are the things that our team wants to learn?**
-  _E.g., develop SDE knowledge, enhance leadership skills, master project planning, improve testing skills, etc_
+  Since we've spent the entirety of our time on back-end development, all members of the team are interested in trying front-end.
 
 
 * **Task processes: What processes will our team follow to meet our goals, complete tasks, or to build team relationships?**
-  _E.g., leadership, meeting procedures/length of meetings, expectations for meeting attendance and timeliness, other types of meetings (happy hours, lunch and learns)_
+  We're all pretty comfortable using asynchronous collaboration tools to work outside of scheduled class time. We have discussed the possibility of meeting up in person for collaborative coding sessions.
 
 ## Meaning & Impact
 
@@ -72,18 +72,18 @@ The following guide might be helpful as you work through your teams charter:
 * _Team Member A_:
 * _Team Member B_:
 * _Team Member C_:
-* _Team Member D_:
+* Tom: I've always enjoyed designing and building new solutions to difficult problems, and I find infrastructure puzzles to be particularly interesting. I'm hoping to find a role to let me explore that further.
 
 **What each team member wants to achieve: e.g. improve analytical skills, learn project management skills, develop public speaking skills, speak up more, speak up less, etc.**
 
 * _Team Member A_:
 * _Team Member B_:
 * _Team Member C_:
-* _Team Member D_:
+* Tom: I continue to be interested in understanding how to solve problems in sustainable, repeatable, extensible fashion rather than implementing a fast solution which won't be re-usable or even usable long-term.
 
 ## Team Member Roles and Responsibilities
 
-_Filling out the following roles and responsibilities is suggested only. Some roles will be permanent and some may be temporary. Some roles may be assigned to one or two people, and others may be rotated. Feel free to create additional rotating or permanent roles as you go._
+_Presently, we think we have a comfortable collaborative balance without formally assigning roles. If necessary, we'll revisit._
 
 |**Role**               |**Responsibilities** |**Primary person** |**Secondary person** |
 |---                    |---                  |---                |---                  |
@@ -100,4 +100,4 @@ _Filling out the following roles and responsibilities is suggested only. Some ro
 * _Team Member A_:
 * _Team Member B_:
 * _Team Member C_:
-* _Team Member D_:
+* Tom
