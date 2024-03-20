@@ -2,9 +2,6 @@
 
 ## Instructions
 
-_Answer the questions below and fill out the process sections with your team’s mechanisms to follow your answers. Remove the italicized examples text as you go._
-
-_On real world software teams, you will often create a document like this via a process called [reteaming](https://www.agilealliance.org/resources/experience-reports/dynamic-reteaming-how-we-thrive-by-rebuilding-teams/). Having something that captures the goals and concerns of everyone on a team helps the team work more efficiently together._
 
 ## Purpose
 
@@ -26,35 +23,35 @@ The following guide might be helpful as you work through your teams charter:
 
 ### Team Members
 
-- _Team Member A_
-- _Team Member B_
-- _Team Member C_
-- _Team Member D_
+- Austin
+- Cliff
+- Dan
+- Tom
 
 ### Psychological safety
 
 * **How can we take risks on this team without feeling insecure or embarrassed?**
-  _E.g., Be open to opinions that differ from your own, actively ask for opinions from each member of the team, do not interrupt each other, don’t place blame, all suggestions or questions are encouraged, listened to, considered equally, and never judged_
+  We will encourage an open environment and provde constructive criticism without placing blame.
 
 * **How do we address situations where any team member feels unsafe?**
-  _E.g., communicate when there is a misunderstanding, don’t move forward until the situation is resolved, directly address and resolve negativity, give and receive feedback with a positive, strength-building mindset, if necessary, escalate to an instructor 
+  If situations spiral outside of our ability to handle them like adults, we will consult with instructors.
 
 ### Dependability, Structure, Clarity
 
 * **How can we count on each other to do high quality work on time?**
-  _E.g., estimate task size, break down large tasks, call out tasks at risk early, ask each other for help, how to ensure timely code reviews, how to share knowledge, help each other hold accountability give frequent, scheduled updates_
+  Since our group has a great deal of flexibility when it comes to working hours, we will use strong communication to work asynchronously and assure that we're all in the loop.
 
 * **How do we address missed deadlines?**
-  _E.g., acknowledge, but don’t punish slipped dates, figure out what went wrong, identify lessons for future_
+  If we run into issues meeting deadlines, we feel comfortable that the group can provide support to get us across the line.
 
 * **How can we make goals, roles, and execution plans on our team clear?**
-  _E.g., where to track goals and when to review them, use definitive, quantifiable terminology, include clear background on why this goal is necessary, include “done” criteria for the goal (code is pushed with integration tests, document is reviewed, etc.)_
+  Using tools like GitHub's tracking board will allow us to stay on the same page.
 
 
 ### Goals
 
 * **Overall: What is our overall objective for the Learn & Be Curious unit?**
-  _E.g., “Apply what we’ve learned throughout this program in a team project to prepare ourselves for internships and full-time SDE roles.”_
+  We're excited to apply 
 
 
 * **Performance: What do we want to prioritize in terms of what we achieve?**
