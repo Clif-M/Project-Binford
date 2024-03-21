@@ -24,7 +24,7 @@ env:
   PIPELINE_USER_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   SAM_TEMPLATE: template.yaml
 
-  STACK_NAME: project-binford
+  STACK_NAME: music-playlist-service
   PIPELINE_EXECUTION_ROLE: arn:aws:iam::891376967817:role/aws-sam-cli-managed-ServiceSt-PipelineExecutionRole-WXcWFboBQP1j
   CLOUDFORMATION_EXECUTION_ROLE: arn:aws:iam::891376967817:role/aws-sam-cli-managed-Servi-CloudFormationExecutionRo-xFNQIvwwu5nY
   ARTIFACTS_BUCKET: aws-sam-cli-managed-servicestagea--artifactsbucket-8jgiuubex6h5
