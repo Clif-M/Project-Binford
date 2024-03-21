@@ -98,6 +98,6 @@ _Presently, we think we have a comfortable collaborative balance without formall
 **I agree to the terms and conditions of these team agreements:**
 
 * Austin
-* _Cliff_
+* Cliff
 * Dan
 * Tom
