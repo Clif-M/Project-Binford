@@ -69,14 +69,14 @@ The following guide might be helpful as you work through your teams charter:
 
 **What is personally important for each team member about becoming an SDE?**
 
-* _Team Member A_:
+* Austin: I want to continue to learn and grow my abilities while successfully contributing to projects as a team member.
 * Cliff: I want to be challenged and solve new problems. It is important to me to continue to learn new things and find new ways to solve problems.
 * Dan: I want to use the skills I have worked so long and so hard to gain at a job where I can create useful apps and also make a good living doing it.  SDE allows me to have both.
 * Tom: I've always enjoyed designing and building new solutions to difficult problems, and I find infrastructure puzzles to be particularly interesting. I'm hoping to find a role to let me explore that further.
 
 **What each team member wants to achieve: e.g. improve analytical skills, learn project management skills, develop public speaking skills, speak up more, speak up less, etc.**
 
-* _Team Member A_:
+* Austin: I want to better understand technical and design aspects, as well as better my ability to discuss and explain my ideas and code.
 * Cliff: I aim to increase my ability to design and understand project architecture as well as increase my knowledge and skill in front-end development.
 * Dan: I would like to be able to contribute fully to my team's work even though I work all during the week.  I want to learn about leveraging AWS technology and have a positive group project experience.
 * Tom: I continue to be interested in understanding how to solve problems in sustainable, repeatable, extensible fashion rather than implementing a fast solution which won't be re-usable or even usable long-term.
@@ -97,7 +97,7 @@ _Presently, we think we have a comfortable collaborative balance without formall
 
 **I agree to the terms and conditions of these team agreements:**
 
-* _Team Member A_:
+* Austin
 * _Cliff_
 * Dan
 * Tom
