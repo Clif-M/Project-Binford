@@ -27,13 +27,19 @@ _You will submit your completed Accomplishment Tracking Document to your instruc
 ## Week 1
 
 **Goals:**
+    1.  Create and submit team charter
+    2.  Review design doc and provide feedback.
 
 **Activity:**
+    I was not able to be as big a part of the project planning phase as I hoped because I I have to work after class 
+    each day.  To give me a chance to participate Tom sent me the first draft of the doc via Slack and I went over
+    it and asked questions and gave feedback.
 
 **Important Docs, Commits, or Pull Requests**:
 
 **Things learned:**
-
+   We will definitely have to figure out how to use the "vertical slices" method so I am not holding up
+   teammates who are done with their Sprint activity for the week and can take on the next step.
 ## Week 2
 
 **Goals:**
