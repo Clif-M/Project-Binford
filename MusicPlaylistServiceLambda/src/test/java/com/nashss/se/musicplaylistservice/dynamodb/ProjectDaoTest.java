@@ -75,7 +75,7 @@ public class ProjectDaoTest {
     }
 
     @Test
-    public void writeProject_anyProject_interactsWithSaveMethod() throws JsonProcessingException {
+    public void writeProject_anyProject_interactsWithSaveMethod() {
         //GIVEN
         //WHEN
         projectDao.writeProject(testProject);

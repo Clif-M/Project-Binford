@@ -6,6 +6,7 @@ package com.nashss.se.musicplaylistservice.exceptions;
  */
 public class ProjectNotFoundException extends RuntimeException {
 
+    private static final long serialVersionUID = -4951311218130562147L;
 
     /**
      * Exception with no message or cause.
