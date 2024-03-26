@@ -17,6 +17,7 @@ public class Project {
     private String projectStatus;
     private ZonedDateTime creationDate;
     private ZonedDateTime endDate;
+    private String projectDescription;
 
     @DynamoDBHashKey(attributeName = "orgId")
     public String getOrgId() {
@@ -90,6 +91,15 @@ public class Project {
 
     public void setEndDate(ZonedDateTime endDate) {
         this.endDate = endDate;
+    }
+
+    @DynamoDBAttribute(attributeName = "projectDescription")
+    public String getProjectDescription() {
+        return projectDescription;
+    }
+
+    public void setProjectDescription(String projectDescription) {
+        this.projectDescription = projectDescription;
     }
 
 }
