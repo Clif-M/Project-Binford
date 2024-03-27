@@ -51,7 +51,7 @@ public class Material {
     }
 
     @DynamoDBAttribute(attributeName = "isExpendable")
-    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.B)
+    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.BOOL)
     public Boolean getExpendable() {
         return isExpendable;
     }
