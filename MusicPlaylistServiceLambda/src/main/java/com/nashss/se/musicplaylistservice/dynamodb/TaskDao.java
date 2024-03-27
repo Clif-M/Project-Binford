@@ -20,7 +20,7 @@ public class TaskDao {
     /**
      * Instantiates a TaskDao object.
      *
-     * @param mapper the {@link DynamoDBMapper} used to interact with the album_track table
+     * @param mapper the {@link DynamoDBMapper} used to interact with the Task table
      */
 
     @Inject

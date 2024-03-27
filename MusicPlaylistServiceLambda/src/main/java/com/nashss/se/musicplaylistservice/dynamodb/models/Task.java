@@ -1,9 +1,12 @@
 package com.nashss.se.musicplaylistservice.dynamodb.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
+import com.nashss.se.musicplaylistservice.converters.MaterialListConverter;
 import com.nashss.se.musicplaylistservice.converters.ZonedDateTimeConverter;
 
 import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.Objects;
 
 @DynamoDBTable(tableName = "ProjectBinford_TaskTable")
 public class Task {
@@ -12,8 +15,8 @@ public class Task {
     private String assignee;
     private Boolean completed;
     private Integer hoursToComplete;
-    //TODO materialsList needs to be converted to a list of materials once the object exists and can be serialized
-    private String materialsList;
+
+    private List<Material> materialsList;
     private String name;
     private ZonedDateTime startTime;
     private ZonedDateTime stopTime;
@@ -94,12 +97,26 @@ public class Task {
     }
 
     @DynamoDBAttribute(attributeName = "materialsList")
-    //TODO materialsList needs to be converted to a list of materials once the object exists and can be serialized
-    public String getMaterialsList() {
+    @DynamoDBTypeConverted(converter = MaterialListConverter.class)
+    public List<Material> getMaterialsList() {
         return materialsList;
     }
 
-    public void setMaterialsList(String materialsList) {
+    public void setMaterialsList(List<Material> materialsList) {
         this.materialsList = materialsList;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.orgId + this.taskId);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) { return false; }
+        if (this == o) { return true; }
+        if (this.getClass() != o.getClass()) { return false; }
+        Task other = (Task) o;
+        return ( this.orgId.equals(other.orgId) && this.taskId.equals(other.taskId));
     }
 }
