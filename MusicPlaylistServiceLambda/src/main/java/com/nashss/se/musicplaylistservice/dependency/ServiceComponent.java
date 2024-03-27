@@ -7,6 +7,7 @@ import com.nashss.se.musicplaylistservice.activity.GetPlaylistSongsActivity;
 import com.nashss.se.musicplaylistservice.activity.SearchPlaylistsActivity;
 import com.nashss.se.musicplaylistservice.activity.UpdatePlaylistActivity;
 
+import com.nashss.se.musicplaylistservice.activity.material.GetOrgMaterialsActivity;
 import com.nashss.se.musicplaylistservice.activity.material.GetSingleMaterialActivity;
 import dagger.Component;
 
@@ -60,5 +61,11 @@ public interface ServiceComponent {
      * @return GetSingleMaterialActivity
      */
     GetSingleMaterialActivity provideGetSingleMaterialActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return GetOrgMaterialsActivity
+     */
+    GetOrgMaterialsActivity provideGetOrgMaterialsActivity();
 
 }
