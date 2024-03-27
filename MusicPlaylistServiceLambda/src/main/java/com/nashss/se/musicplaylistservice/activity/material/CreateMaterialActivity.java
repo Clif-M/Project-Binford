@@ -1,2 +1,4 @@
-package com.nashss.se.musicplaylistservice.activity.material;public class CreateMaterialActivity {
+package com.nashss.se.musicplaylistservice.activity.material;
+
+public class CreateMaterialActivity {
 }

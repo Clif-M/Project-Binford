@@ -7,6 +7,7 @@ import com.nashss.se.musicplaylistservice.activity.GetPlaylistSongsActivity;
 import com.nashss.se.musicplaylistservice.activity.SearchPlaylistsActivity;
 import com.nashss.se.musicplaylistservice.activity.UpdatePlaylistActivity;
 
+import com.nashss.se.musicplaylistservice.activity.material.GetSingleMaterialActivity;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -53,5 +54,11 @@ public interface ServiceComponent {
      * @return UpdatePlaylistActivity
      */
     UpdatePlaylistActivity provideUpdatePlaylistActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return GetSingleMaterialActivity
+     */
+    GetSingleMaterialActivity provideGetSingleMaterialActivity();
 
 }
