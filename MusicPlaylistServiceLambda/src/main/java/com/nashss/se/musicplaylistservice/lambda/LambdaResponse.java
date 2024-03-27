@@ -3,6 +3,7 @@ package com.nashss.se.musicplaylistservice.lambda;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,6 +14,7 @@ import java.util.Map;
  */
 public class LambdaResponse extends APIGatewayProxyResponseEvent {
     private static final ObjectMapper MAPPER = new ObjectMapper();
+    private static final JavaTimeModule JAVA_TIME_MODULE = new JavaTimeModule();
 
     private static final Logger log = LogManager.getLogger();
     private LambdaResponse(int statusCode, String body) {
@@ -31,6 +33,7 @@ public class LambdaResponse extends APIGatewayProxyResponseEvent {
      * @return A new LambdaResponse
      */
     public static LambdaResponse success(Object payload) {
+        MAPPER.registerModule(JAVA_TIME_MODULE);
         log.info("success");
         try {
             return new LambdaResponse(200, MAPPER.writeValueAsString(payload));
