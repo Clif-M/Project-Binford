@@ -7,22 +7,36 @@ import com.nashss.se.musicplaylistservice.dynamodb.models.Material;
 
 import javax.inject.Inject;
 
+/**
+ * Implementation of UpdateMaterialActivity for Project Binford's UpdateMaterialActivity API
+ *
+ * This API allows a consumer to update a Single Material object with orgId and materialId.
+ */
+
 public class UpdateMaterialActivity {
     private final MaterialDao materialDao;
 
+    /**
+     * Instantiates a new UpdateMaterialActivity object
+     *
+     * @param materialDao MaterialDao to interact with the material table
+     */
     @Inject
     public UpdateMaterialActivity(MaterialDao materialDao) {
         this.materialDao = materialDao;
     }
 
-    public UpdateMaterialResult handleRequest(UpdateMaterialRequest createMaterialRequest) {
-        Material material = materialDao.loadSingleMaterial(createMaterialRequest.getOrgId(), createMaterialRequest.getMaterialId());
-        material.setMaterialId(createMaterialRequest.getMaterialId());
-        material.setOrgId(createMaterialRequest.getOrgId());
-        material.setName(createMaterialRequest.getName());
-        material.setCost(createMaterialRequest.getCost());
-        material.setInventoryCount(createMaterialRequest.getInventoryCount());
-        material.setIsExpendable(createMaterialRequest.getIsExpendable());
+    /**
+     * This method handles the request by accepting an UpdateMaterialRequest object
+     * and saves the updated object to the DB
+     * @return {@link com.nashss.se.musicplaylistservice.dynamodb.models.Material}
+     */
+    public UpdateMaterialResult handleRequest(UpdateMaterialRequest updateMaterialRequest) {
+        Material material = materialDao.loadSingleMaterial(updateMaterialRequest.getOrgId(), updateMaterialRequest.getMaterialId());
+        material.setName(updateMaterialRequest.getName());
+        material.setCost(updateMaterialRequest.getCost());
+        material.setInventoryCount(updateMaterialRequest.getInventoryCount());
+        material.setIsExpendable(updateMaterialRequest.getIsExpendable());
 
         materialDao.writeMaterial(material);
 

@@ -10,7 +10,7 @@ import javax.inject.Singleton;
 import java.util.List;
 
 /**
- * Accesses data for a task using {@link Material} to interact with the model in DynamoDB.
+ * Accesses data for a Material using {@link Material} to interact with the model in DynamoDB.
  */
 
 @Singleton
@@ -71,16 +71,10 @@ public class MaterialDao {
         mapper.save(material);
     }
 
-//    public void updateMaterial(Material material) {
-//        String orgId = material.getOrgId();
-//        String materialId = material.getMaterialId();
-//        Material loadedMaterial = mapper.load(Material.class, orgId, materialId);
-//        if (null == loadedMaterial) {
-//            throw new MaterialNotFoundException(String.format("Could not find material with orgId %s and materialId %s", orgId, materialId));
-//        } else {
-//            writeMaterial(material);
-//        }
-//    }
+    public boolean checkIfExist(Material material) {
+        Material loaded = mapper.load(Material.class, material.getOrgId(), material.getMaterialId());
+        return loaded != null;
+    }
 
     /**
      * Removes the provided Material from DynamoDB, if present.
