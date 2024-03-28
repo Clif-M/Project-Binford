@@ -1,12 +1,26 @@
 package com.nashss.se.musicplaylistservice.activity.material.result;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.nashss.se.musicplaylistservice.activity.material.request.CreateMaterialRequest;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Material;
 
 public class CreateMaterialResult {
     private final Material material;
 
+    @Override
+    public String toString() {
+        return "CreateMaterialResult{" +
+                "material=" + material +
+                '}';
+    }
+
     private CreateMaterialResult(Material material) {
         this.material = material;
+    }
+
+    public Material getMaterial() {
+        return material;
     }
 
     public static Builder builder() {

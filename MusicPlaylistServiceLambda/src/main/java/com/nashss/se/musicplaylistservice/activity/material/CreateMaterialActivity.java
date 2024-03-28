@@ -22,7 +22,7 @@ public class CreateMaterialActivity {
        material.setName(createMaterialRequest.getName());
        material.setCost(createMaterialRequest.getCost());
        material.setInventoryCount(createMaterialRequest.getInventoryCount());
-       material.setExpendable(createMaterialRequest.getExpendable());
+       material.setIsExpendable(createMaterialRequest.getIsExpendable());
 
        materialDao.writeMaterial(material);
 

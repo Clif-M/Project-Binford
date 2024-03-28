@@ -38,7 +38,7 @@ public class CreateMaterialRequest {
         return cost;
     }
 
-    public Boolean getExpendable() {
+    public Boolean getIsExpendable() {
         return isExpendable;
     }
 
@@ -90,7 +90,7 @@ public class CreateMaterialRequest {
             return this;
         }
 
-        public Builder withExpendable(Boolean isExpendable) {
+        public Builder withIsExpendable(Boolean isExpendable) {
             this.isExpendable=isExpendable;
             return this;
         }
