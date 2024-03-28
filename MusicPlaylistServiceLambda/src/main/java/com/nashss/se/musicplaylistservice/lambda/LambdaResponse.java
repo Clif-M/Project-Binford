@@ -51,6 +51,14 @@ public class LambdaResponse extends APIGatewayProxyResponseEvent {
     }
 
     /**
+     * Create a successful response without a body.
+     * @return A new LambdaResponse
+     */
+    public static LambdaResponse successNoContent() {
+        return new LambdaResponse(204, "");
+    }
+
+    /**
      * Create a Not Found response.
      * @return A new LambdaResponse
      */

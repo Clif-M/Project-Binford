@@ -346,6 +346,106 @@ Resources:
             Path: /playlists/{id}/songs
             Method: post
 
+  GetOrganizationLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: MusicPlaylistServiceLambda
+      Handler: com.nashss.se.musicplaylistservice.lambda.organizationLambda.GetOrganizationLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        MusicPlaylistService:
+          Type: Api
+          Properties:
+            Path: /organizations/{orgId}
+            Method: get
+
+  GetAllOrganizationsLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: MusicPlaylistServiceLambda
+      Handler: com.nashss.se.musicplaylistservice.lambda.organizationLambda.GetAllOrganizationsLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        MusicPlaylistService:
+          Type: Api
+          Properties:
+            Path: /organizations
+            Method: get
+
+  CreateOrganizationLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: MusicPlaylistServiceLambda
+      Handler: com.nashss.se.musicplaylistservice.lambda.organizationLambda.CreateOrganizationLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        MusicPlaylistService:
+          Type: Api
+          Properties:
+            Path: /organizations
+            Method: post
+
+  UpdateOrganizationLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: MusicPlaylistServiceLambda
+      Handler: com.nashss.se.musicplaylistservice.lambda.organizationLambda.UpdateOrganizationLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        MusicPlaylistService:
+          Type: Api
+          Properties:
+            Path: /organizations/{orgId}
+            Method: put
+
+  DeleteOrganizationLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: MusicPlaylistServiceLambda
+      Handler: com.nashss.se.musicplaylistservice.lambda.organizationLambda.DeleteOrganizationLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        MusicPlaylistService:
+          Type: Api
+          Properties:
+            Path: /organizations/{orgId}
+            Method: delete
+
   #-----------------------------------------------------
   # DynamoDB Configuration
   #-----------------------------------------------------

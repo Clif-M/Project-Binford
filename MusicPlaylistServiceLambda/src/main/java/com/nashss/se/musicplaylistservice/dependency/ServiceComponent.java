@@ -7,6 +7,7 @@ import com.nashss.se.musicplaylistservice.activity.GetPlaylistSongsActivity;
 import com.nashss.se.musicplaylistservice.activity.SearchPlaylistsActivity;
 import com.nashss.se.musicplaylistservice.activity.UpdatePlaylistActivity;
 
+import com.nashss.se.musicplaylistservice.activity.organizationActivities.*;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -53,5 +54,35 @@ public interface ServiceComponent {
      * @return UpdatePlaylistActivity
      */
     UpdatePlaylistActivity provideUpdatePlaylistActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return GetOrganizationActivity
+     */
+    GetOrganizationActivity provideGetOrganizationActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return GetAllOrganizationsActivity
+     */
+    GetAllOrganizationsActivity provideGetAllOrganizationsActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return CreateOrganizationActivity
+     */
+    CreateOrganizationActivity provideCreateOrganizationActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return UpdateOrganizationActivity
+     */
+    UpdateOrganizationActivity provideUpdateOrganizationActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return DeleteOrganizationActivity
+     */
+    DeleteOrganizationActivity provideDeleteOrganizationActivity();
 
 }
