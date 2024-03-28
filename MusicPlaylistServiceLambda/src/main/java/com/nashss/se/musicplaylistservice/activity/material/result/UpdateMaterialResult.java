@@ -1,19 +1,18 @@
 package com.nashss.se.musicplaylistservice.activity.material.result;
 
-
 import com.nashss.se.musicplaylistservice.dynamodb.models.Material;
 
-public class CreateMaterialResult {
+public class UpdateMaterialResult {
     private final Material material;
 
     @Override
     public String toString() {
-        return "CreateMaterialResult{" +
+        return "UpdateMaterialResult{" +
                 "material=" + material +
                 '}';
     }
 
-    private CreateMaterialResult(Material material) {
+    private UpdateMaterialResult(Material material) {
         this.material = material;
     }
 
@@ -32,8 +31,8 @@ public class CreateMaterialResult {
             return this;
         }
 
-        public CreateMaterialResult build() {
-            return new CreateMaterialResult(material);
+        public UpdateMaterialResult build() {
+            return new UpdateMaterialResult(material);
         }
     }
 }

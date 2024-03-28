@@ -71,6 +71,17 @@ public class MaterialDao {
         mapper.save(material);
     }
 
+//    public void updateMaterial(Material material) {
+//        String orgId = material.getOrgId();
+//        String materialId = material.getMaterialId();
+//        Material loadedMaterial = mapper.load(Material.class, orgId, materialId);
+//        if (null == loadedMaterial) {
+//            throw new MaterialNotFoundException(String.format("Could not find material with orgId %s and materialId %s", orgId, materialId));
+//        } else {
+//            writeMaterial(material);
+//        }
+//    }
+
     /**
      * Removes the provided Material from DynamoDB, if present.
      *
