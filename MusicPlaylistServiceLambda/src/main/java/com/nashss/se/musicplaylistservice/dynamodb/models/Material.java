@@ -4,7 +4,6 @@ import com.amazonaws.services.dynamodbv2.datamodeling.*;
 
 import java.util.Objects;
 
-//TODO Serialize object
 @DynamoDBTable(tableName = "ProjectBinford_MaterialTable")
 public class Material {
     private String name;
@@ -51,12 +50,12 @@ public class Material {
     }
 
     @DynamoDBAttribute(attributeName = "isExpendable")
-    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.B)
-    public Boolean getExpendable() {
+    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.BOOL)
+    public Boolean getIsExpendable() {
         return isExpendable;
     }
 
-    public void setExpendable(Boolean expendable) {
+    public void setIsExpendable(Boolean expendable) {
         isExpendable = expendable;
     }
 

@@ -7,6 +7,8 @@ import com.nashss.se.musicplaylistservice.activity.GetPlaylistSongsActivity;
 import com.nashss.se.musicplaylistservice.activity.SearchPlaylistsActivity;
 import com.nashss.se.musicplaylistservice.activity.UpdatePlaylistActivity;
 
+
+import com.nashss.se.musicplaylistservice.activity.material.*;
 import com.nashss.se.musicplaylistservice.activity.taskActivities.*;
 import com.nashss.se.musicplaylistservice.activity.organizationActivities.*;
 import dagger.Component;
@@ -57,6 +59,36 @@ public interface ServiceComponent {
     UpdatePlaylistActivity provideUpdatePlaylistActivity();
 
     /**
+
+     * Provides the relevant activity.
+     * @return GetSingleMaterialActivity
+     */
+    GetSingleMaterialActivity provideGetSingleMaterialActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return GetOrgMaterialsActivity
+     */
+    GetOrgMaterialsActivity provideGetOrgMaterialsActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return CreateMaterialsActivity
+     */
+    CreateMaterialActivity provideCreateMaterialActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return UpdateMaterialsActivity
+     */
+    UpdateMaterialActivity provideUpdateMaterialActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return UpdateMaterialsActivity
+     */
+    DeleteMaterialActivity provideDeleteMaterialActivity();
+
      * Provides the relevant activity
      * @return GetTaskActivity
      */
