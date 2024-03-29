@@ -33,7 +33,7 @@ public class MaterialListConverterTest {
         objectList = new ArrayList<>();
         objectList.add(material1);
         objectList.add(material2);
-        serial = "[{\"name\":\"Elvis\",\"orgId\":\"1\",\"materialId\":\"1\",\"cost\":null,\"inventoryCount\":null,\"expendable\":null},{\"name\":\"Madonna\",\"orgId\":\"2\",\"materialId\":\"2\",\"cost\":null,\"inventoryCount\":null,\"expendable\":null}]";
+        serial = "[{\"name\":\"Elvis\",\"orgId\":\"1\",\"materialId\":\"1\",\"cost\":null,\"inventoryCount\":null,\"isExpendable\":null},{\"name\":\"Madonna\",\"orgId\":\"2\",\"materialId\":\"2\",\"cost\":null,\"inventoryCount\":null,\"isExpendable\":null}]";
     }
 
     @Test

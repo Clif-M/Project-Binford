@@ -88,7 +88,7 @@ public interface ServiceComponent {
      * @return UpdateMaterialsActivity
      */
     DeleteMaterialActivity provideDeleteMaterialActivity();
-
+    /**
      * Provides the relevant activity
      * @return GetTaskActivity
      */
