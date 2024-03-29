@@ -424,7 +424,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /organizations/{orgId}/assignees/{assignee}
+            Path: /organizations/{orgId}/assignees/{assignee}/tasks
             Method: get
 
   UpdateTaskLambda:
