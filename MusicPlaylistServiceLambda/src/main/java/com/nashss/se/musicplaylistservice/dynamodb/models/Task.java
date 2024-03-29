@@ -6,7 +6,6 @@ import com.nashss.se.musicplaylistservice.converters.ZonedDateTimeConverter;
 
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Objects;
 
 @DynamoDBTable(tableName = "ProjectBinford_TaskTable")
 public class Task {
@@ -22,6 +21,7 @@ public class Task {
     private ZonedDateTime stopTime;
 
     @DynamoDBHashKey(attributeName = "orgId")
+    @DynamoDBIndexHashKey(globalSecondaryIndexName = "TasksSortByAssigneeIndex")
     public String getOrgId() {
         return orgId;
     }
@@ -39,7 +39,7 @@ public class Task {
         this.taskId = taskId;
     }
 
-    @DynamoDBAttribute(attributeName = "assignee")
+    @DynamoDBIndexRangeKey(globalSecondaryIndexName = "TasksSortByAssigneeIndex", attributeName = "assignee")
     public String getAssignee() {
         return assignee;
     }
@@ -49,7 +49,7 @@ public class Task {
     }
 
     @DynamoDBAttribute(attributeName = "completed")
-    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.B)
+    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.BOOL)
     public Boolean getCompleted() {
         return completed;
     }
@@ -104,19 +104,5 @@ public class Task {
 
     public void setMaterialsList(List<Material> materialsList) {
         this.materialsList = materialsList;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.orgId + this.taskId);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null) { return false; }
-        if (this == o) { return true; }
-        if (this.getClass() != o.getClass()) { return false; }
-        Task other = (Task) o;
-        return ( this.orgId.equals(other.orgId) && this.taskId.equals(other.taskId));
     }
 }
