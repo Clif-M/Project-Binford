@@ -4,6 +4,9 @@ import com.nashss.se.musicplaylistservice.activity.material.request.CreateMateri
 import com.nashss.se.musicplaylistservice.activity.material.result.CreateMaterialResult;
 import com.nashss.se.musicplaylistservice.dynamodb.MaterialDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Material;
+import com.nashss.se.musicplaylistservice.exceptions.InvalidAttributeValueException;
+import org.mockito.Spy;
+
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -32,6 +35,9 @@ public class CreateMaterialActivity {
      * @return single {@link com.nashss.se.musicplaylistservice.dynamodb.models.Material} that was just written
      */
    public CreateMaterialResult handleRequest(CreateMaterialRequest createMaterialRequest) {
+       if (createMaterialRequest.getOrgId() == null) {
+           throw new InvalidAttributeValueException("Error retrieving Material resource: required value cannot be null");
+       }
        Material material = new Material();
        material.setMaterialId(UUID.randomUUID().toString());
        material.setOrgId(createMaterialRequest.getOrgId());

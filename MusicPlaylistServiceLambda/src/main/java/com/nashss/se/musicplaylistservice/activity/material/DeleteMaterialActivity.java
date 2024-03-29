@@ -4,6 +4,7 @@ import com.nashss.se.musicplaylistservice.activity.material.request.DeleteMateri
 import com.nashss.se.musicplaylistservice.activity.material.result.DeleteMaterialResult;
 import com.nashss.se.musicplaylistservice.dynamodb.MaterialDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Material;
+import com.nashss.se.musicplaylistservice.exceptions.InvalidAttributeValueException;
 
 import javax.inject.Inject;
 
@@ -32,6 +33,9 @@ public class DeleteMaterialActivity {
      * @return {@link com.nashss.se.musicplaylistservice.dynamodb.models.Material}
      */
     public DeleteMaterialResult handleRequest(final DeleteMaterialRequest deleteMaterialRequest) {
+        if (deleteMaterialRequest.getMaterialId() == null || deleteMaterialRequest.getOrgId() == null) {
+            throw new InvalidAttributeValueException("Error deleting Material resource: required value cannot be null");
+        }
         String orgId = deleteMaterialRequest.getOrgId();
         String materialId = deleteMaterialRequest.getMaterialId();
         Material material = materialDao.loadSingleMaterial(orgId,materialId);

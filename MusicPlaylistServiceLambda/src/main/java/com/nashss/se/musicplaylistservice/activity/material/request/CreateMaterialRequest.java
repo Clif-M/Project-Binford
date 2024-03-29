@@ -8,15 +8,13 @@ public class CreateMaterialRequest {
 
     private final String name;
     private final String orgId;
-    private final String materialId;
     private final Double cost;
     private final Boolean isExpendable;
     private final Integer inventoryCount;
 
-    private CreateMaterialRequest(String name, String orgId, String materialId, Double cost, Boolean isExpendable, Integer inventoryCount) {
+    private CreateMaterialRequest(String name, String orgId, Double cost, Boolean isExpendable, Integer inventoryCount) {
         this.name = name;
         this.orgId = orgId;
-        this.materialId = materialId;
         this.cost = cost;
         this.isExpendable = isExpendable;
         this.inventoryCount = inventoryCount;
@@ -30,9 +28,6 @@ public class CreateMaterialRequest {
         return orgId;
     }
 
-    public String getMaterialId() {
-        return materialId;
-    }
 
     public Double getCost() {
         return cost;
@@ -51,7 +46,6 @@ public class CreateMaterialRequest {
         return "CreatePlaylistRequest{" +
                 "name='" + name + '\'' +
                 ", orgID='" + orgId + '\'' +
-                ", materialId='" + materialId + '\'' +
                 ", cost='" + cost + '\'' +
                 ", isExpendable='" + isExpendable + '\'' +
                 ", inventoryCount='" + inventoryCount +
@@ -65,7 +59,6 @@ public class CreateMaterialRequest {
     public static class Builder{
         private String name;
         private String orgId;
-        private String materialId;
         private Double cost;
         private Boolean isExpendable;
         private Integer inventoryCount;
@@ -80,10 +73,6 @@ public class CreateMaterialRequest {
             return this;
         }
 
-        public Builder withMaterialId(String materialId) {
-            this.materialId=materialId;
-            return this;
-        }
 
         public Builder withCost(Double cost) {
             this.cost = cost;
@@ -101,7 +90,7 @@ public class CreateMaterialRequest {
         }
 
         public CreateMaterialRequest build() {
-            return new CreateMaterialRequest(name,orgId,materialId,cost,isExpendable,inventoryCount);
+            return new CreateMaterialRequest(name,orgId,cost,isExpendable,inventoryCount);
         }
 
 

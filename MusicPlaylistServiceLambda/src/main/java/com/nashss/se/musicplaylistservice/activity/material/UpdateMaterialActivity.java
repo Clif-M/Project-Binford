@@ -4,6 +4,7 @@ import com.nashss.se.musicplaylistservice.activity.material.request.UpdateMateri
 import com.nashss.se.musicplaylistservice.activity.material.result.UpdateMaterialResult;
 import com.nashss.se.musicplaylistservice.dynamodb.MaterialDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Material;
+import com.nashss.se.musicplaylistservice.exceptions.InvalidAttributeValueException;
 
 import javax.inject.Inject;
 
@@ -32,6 +33,9 @@ public class UpdateMaterialActivity {
      * @return {@link com.nashss.se.musicplaylistservice.dynamodb.models.Material}
      */
     public UpdateMaterialResult handleRequest(UpdateMaterialRequest updateMaterialRequest) {
+        if (updateMaterialRequest.getMaterialId() == null || updateMaterialRequest.getOrgId() == null) {
+            throw new InvalidAttributeValueException("Error updating Material resource: required value cannot be null");
+        }
         Material material = materialDao.loadSingleMaterial(updateMaterialRequest.getOrgId(), updateMaterialRequest.getMaterialId());
         material.setName(updateMaterialRequest.getName());
         material.setCost(updateMaterialRequest.getCost());

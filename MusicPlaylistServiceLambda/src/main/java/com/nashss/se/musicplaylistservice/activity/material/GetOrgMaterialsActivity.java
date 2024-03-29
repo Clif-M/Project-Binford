@@ -4,6 +4,7 @@ import com.nashss.se.musicplaylistservice.activity.material.request.GetOrgMateri
 import com.nashss.se.musicplaylistservice.activity.material.result.GetOrgMaterialsResult;
 import com.nashss.se.musicplaylistservice.dynamodb.MaterialDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Material;
+import com.nashss.se.musicplaylistservice.exceptions.InvalidAttributeValueException;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -35,6 +36,9 @@ public class GetOrgMaterialsActivity {
      */
 
     public GetOrgMaterialsResult handleRequest(final GetOrgMaterialsRequest getOrgMaterialsRequest) {
+        if (getOrgMaterialsRequest.getOrgId() == null) {
+            throw new InvalidAttributeValueException("Error retrieving Material resource: required value cannot be null");
+        }
         String orgId = getOrgMaterialsRequest.getOrgId();
         List<Material> materials = materialDao.loadMaterialsForOrg(orgId);
         return GetOrgMaterialsResult.builder()
