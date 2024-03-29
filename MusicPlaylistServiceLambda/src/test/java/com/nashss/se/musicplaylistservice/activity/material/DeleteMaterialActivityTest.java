@@ -1,8 +1,6 @@
 package com.nashss.se.musicplaylistservice.activity.material;
 
-import com.nashss.se.musicplaylistservice.activity.material.request.CreateMaterialRequest;
 import com.nashss.se.musicplaylistservice.activity.material.request.DeleteMaterialRequest;
-import com.nashss.se.musicplaylistservice.activity.material.request.GetMaterialRequest;
 import com.nashss.se.musicplaylistservice.activity.material.result.DeleteMaterialResult;
 import com.nashss.se.musicplaylistservice.dynamodb.MaterialDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Material;

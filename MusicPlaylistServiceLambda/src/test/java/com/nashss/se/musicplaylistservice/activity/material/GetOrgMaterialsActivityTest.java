@@ -1,8 +1,6 @@
 package com.nashss.se.musicplaylistservice.activity.material;
 
-import com.nashss.se.musicplaylistservice.activity.material.request.GetMaterialRequest;
 import com.nashss.se.musicplaylistservice.activity.material.request.GetOrgMaterialsRequest;
-import com.nashss.se.musicplaylistservice.activity.material.result.GetMaterialResult;
 import com.nashss.se.musicplaylistservice.activity.material.result.GetOrgMaterialsResult;
 import com.nashss.se.musicplaylistservice.dynamodb.MaterialDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Material;

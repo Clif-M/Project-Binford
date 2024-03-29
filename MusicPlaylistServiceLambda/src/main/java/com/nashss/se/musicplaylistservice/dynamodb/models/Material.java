@@ -4,7 +4,6 @@ import com.amazonaws.services.dynamodbv2.datamodeling.*;
 
 import java.util.Objects;
 
-//TODO Serialize object
 @DynamoDBTable(tableName = "ProjectBinford_MaterialTable")
 public class Material {
     private String name;

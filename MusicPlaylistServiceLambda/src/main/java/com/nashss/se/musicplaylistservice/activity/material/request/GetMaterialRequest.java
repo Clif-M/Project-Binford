@@ -1,6 +1,5 @@
 package com.nashss.se.musicplaylistservice.activity.material.request;
 
-import com.nashss.se.musicplaylistservice.activity.requests.GetPlaylistRequest;
 
 public class GetMaterialRequest {
     private final String orgId;
