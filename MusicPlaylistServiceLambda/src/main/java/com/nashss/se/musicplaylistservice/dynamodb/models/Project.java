@@ -66,11 +66,11 @@ public class Project {
 
     @DynamoDBAttribute(attributeName = "taskList")
     public List<Task> getTaskList() {
-        return new ArrayList<>(taskList);
+        return taskList;
     }
 
-    public void setTaskList(Task task) {
-        this.taskList.add(task);
+    public void setTaskList(List<Task> taskList) {
+        this.taskList = taskList;
     }
 
     @DynamoDBAttribute(attributeName = "creationDate")
@@ -79,7 +79,7 @@ public class Project {
         return creationDate;
     }
 
-    public void setStartTime(ZonedDateTime creationDate) {
+    public void setCreationDate(ZonedDateTime creationDate) {
         this.creationDate = creationDate;
     }
 

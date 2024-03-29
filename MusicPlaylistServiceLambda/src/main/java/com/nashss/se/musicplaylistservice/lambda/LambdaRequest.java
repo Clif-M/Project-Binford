@@ -4,6 +4,7 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,6 +22,7 @@ import static com.nashss.se.musicplaylistservice.utils.NullUtils.ifNull;
 public class LambdaRequest<T> extends APIGatewayProxyRequestEvent {
 
     protected static final ObjectMapper MAPPER = new ObjectMapper();
+    protected static final JavaTimeModule JAVA_TIME_MODULE = new JavaTimeModule();
     protected final Logger log = LogManager.getLogger();
 
     /**
@@ -29,6 +31,7 @@ public class LambdaRequest<T> extends APIGatewayProxyRequestEvent {
      * @return A new instance of T that contains data from the request body
      */
     public T fromBody(Class<T> requestClass) {
+        MAPPER.registerModule(JAVA_TIME_MODULE);
         log.info("Attempting to deserialize object from request body ({}).", requestClass.getSimpleName());
         try {
             return MAPPER.readValue(super.getBody(), requestClass);

@@ -2,12 +2,16 @@ package com.nashss.se.musicplaylistservice.dynamodb;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.nashss.se.musicplaylistservice.exceptions.TaskNotFoundException;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Task;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Accesses data for a task using {@link Task} to interact with the model in DynamoDB.
@@ -20,7 +24,7 @@ public class TaskDao {
     /**
      * Instantiates a TaskDao object.
      *
-     * @param mapper the {@link DynamoDBMapper} used to interact with the album_track table
+     * @param mapper the {@link DynamoDBMapper} used to interact with the Task table
      */
 
     @Inject
@@ -77,6 +81,27 @@ public class TaskDao {
      */
     public void deleteTask(Task task) {
         mapper.delete(task);
+    }
+
+    /**
+     * Retrieves all tasks matching provided orgId and assignee.
+     *
+     * If none found, returns an empty list.
+     *
+     * @param orgId The orgId to look up
+     * @param assignee the assignee to look up
+     * @return A list of Tasks found, if any
+     */
+    public List<Task> getTasksForAssignee(String orgId, String assignee) {
+        Map<String, AttributeValue> valueMap = new HashMap<>();
+        valueMap.put(":orgId", new AttributeValue(orgId));
+        valueMap.put(":assignee", new AttributeValue(assignee));
+        DynamoDBQueryExpression<Task> queryExpression = new DynamoDBQueryExpression<Task>()
+                .withIndexName("TasksSortByAssigneeIndex")
+                .withConsistentRead(false)
+                .withKeyConditionExpression("orgId = :orgId and assignee = :assignee")
+                .withExpressionAttributeValues(valueMap);
+        return mapper.query(Task.class, queryExpression);
     }
 
 }

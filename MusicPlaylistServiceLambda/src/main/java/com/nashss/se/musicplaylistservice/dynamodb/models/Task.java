@@ -1,9 +1,11 @@
 package com.nashss.se.musicplaylistservice.dynamodb.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
+import com.nashss.se.musicplaylistservice.converters.MaterialListConverter;
 import com.nashss.se.musicplaylistservice.converters.ZonedDateTimeConverter;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 
 @DynamoDBTable(tableName = "ProjectBinford_TaskTable")
 public class Task {
@@ -12,13 +14,14 @@ public class Task {
     private String assignee;
     private Boolean completed;
     private Integer hoursToComplete;
-    //TODO materialsList needs to be converted to a list of materials once the object exists and can be serialized
-    private String materialsList;
+
+    private List<Material> materialsList;
     private String name;
     private ZonedDateTime startTime;
     private ZonedDateTime stopTime;
 
     @DynamoDBHashKey(attributeName = "orgId")
+    @DynamoDBIndexHashKey(globalSecondaryIndexName = "TasksSortByAssigneeIndex")
     public String getOrgId() {
         return orgId;
     }
@@ -36,7 +39,7 @@ public class Task {
         this.taskId = taskId;
     }
 
-    @DynamoDBAttribute(attributeName = "assignee")
+    @DynamoDBIndexRangeKey(globalSecondaryIndexName = "TasksSortByAssigneeIndex", attributeName = "assignee")
     public String getAssignee() {
         return assignee;
     }
@@ -46,7 +49,7 @@ public class Task {
     }
 
     @DynamoDBAttribute(attributeName = "completed")
-    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.B)
+    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.BOOL)
     public Boolean getCompleted() {
         return completed;
     }
@@ -94,12 +97,12 @@ public class Task {
     }
 
     @DynamoDBAttribute(attributeName = "materialsList")
-    //TODO materialsList needs to be converted to a list of materials once the object exists and can be serialized
-    public String getMaterialsList() {
+    @DynamoDBTypeConverted(converter = MaterialListConverter.class)
+    public List<Material> getMaterialsList() {
         return materialsList;
     }
 
-    public void setMaterialsList(String materialsList) {
+    public void setMaterialsList(List<Material> materialsList) {
         this.materialsList = materialsList;
     }
 }

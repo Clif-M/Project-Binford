@@ -2,7 +2,9 @@ package com.nashss.se.musicplaylistservice.dynamodb;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
+import com.nashss.se.musicplaylistservice.dynamodb.models.Organization;
 import com.nashss.se.musicplaylistservice.exceptions.TaskNotFoundException;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Task;
 import org.junit.jupiter.api.BeforeEach;

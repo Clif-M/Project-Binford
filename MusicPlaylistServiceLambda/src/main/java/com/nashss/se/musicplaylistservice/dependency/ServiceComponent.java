@@ -7,7 +7,10 @@ import com.nashss.se.musicplaylistservice.activity.GetPlaylistSongsActivity;
 import com.nashss.se.musicplaylistservice.activity.SearchPlaylistsActivity;
 import com.nashss.se.musicplaylistservice.activity.UpdatePlaylistActivity;
 
+
 import com.nashss.se.musicplaylistservice.activity.material.*;
+import com.nashss.se.musicplaylistservice.activity.taskActivities.*;
+import com.nashss.se.musicplaylistservice.activity.organizationActivities.*;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -56,6 +59,7 @@ public interface ServiceComponent {
     UpdatePlaylistActivity provideUpdatePlaylistActivity();
 
     /**
+
      * Provides the relevant activity.
      * @return GetSingleMaterialActivity
      */
@@ -84,5 +88,70 @@ public interface ServiceComponent {
      * @return UpdateMaterialsActivity
      */
     DeleteMaterialActivity provideDeleteMaterialActivity();
+
+     * Provides the relevant activity
+     * @return GetTaskActivity
+     */
+    GetTaskActivity provideGetTaskActivity();
+
+    /**
+     * Provides the relevant activity
+     * @return GetTasksForOrgActivity
+     */
+    GetTasksForOrgActivity provideGetTasksForOrgActivity();
+
+    /**
+     * Provides the relevant activity
+     * @return DeleteTaskActivity
+     */
+    DeleteTaskActivity provideDeleteTaskActivity();
+
+    /**
+     * Provides the relevant activity
+     * @return GetTasksForAssigneeActivity
+     */
+    GetTasksForAssigneeActivity provideGetTasksForAssigneeActivity();
+
+    /**
+     * Provides the relevant activity
+     * @return UpdateTaskActivity
+     */
+    UpdateTaskActivity provideUpdateTaskActivity();
+
+    /**
+     * Provides the relevant activity
+     * @return CreateTaskActivity
+     */
+    CreateTaskActivity provideCreateTaskActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return GetOrganizationActivity
+     */
+    GetOrganizationActivity provideGetOrganizationActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return GetAllOrganizationsActivity
+     */
+    GetAllOrganizationsActivity provideGetAllOrganizationsActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return CreateOrganizationActivity
+     */
+    CreateOrganizationActivity provideCreateOrganizationActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return UpdateOrganizationActivity
+     */
+    UpdateOrganizationActivity provideUpdateOrganizationActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return DeleteOrganizationActivity
+     */
+    DeleteOrganizationActivity provideDeleteOrganizationActivity();
 
 }
