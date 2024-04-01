@@ -7,10 +7,13 @@ import com.nashss.se.musicplaylistservice.activity.GetPlaylistSongsActivity;
 import com.nashss.se.musicplaylistservice.activity.SearchPlaylistsActivity;
 import com.nashss.se.musicplaylistservice.activity.UpdatePlaylistActivity;
 
+
+import com.nashss.se.musicplaylistservice.activity.userroleactivities.*;
 import com.nashss.se.musicplaylistservice.activity.projectActivities.*;
 import com.nashss.se.musicplaylistservice.activity.material.*;
 import com.nashss.se.musicplaylistservice.activity.taskActivities.*;
 import com.nashss.se.musicplaylistservice.activity.organizationActivities.*;
+
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -59,7 +62,30 @@ public interface ServiceComponent {
     UpdatePlaylistActivity provideUpdatePlaylistActivity();
 
     /**
+     * Provides the relevant activity.
+     * @return GetSingleUserRoleActivity
+     */
+    GetSingleUserRoleActivity provideGetSingleUserRoleActivity();
 
+    /**
+     * Provides the relevant activity.
+     * @return GetUserRolesActivity
+     */
+    GetUserRolesActivity provideGetUserRolesActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return CreateUserRoleActivity
+     */
+    CreateUserRoleActivity provideCreateUserRoleActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return UpdateUserRoleActivity
+     */
+    UpdateUserRoleActivity provideUpdateUserRoleActivity();
+
+     /**
      * Provides the relevant activity.
      * @return GetSingleMaterialActivity
      */

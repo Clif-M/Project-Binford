@@ -11,6 +11,7 @@ public class UserRole {
     private String orgId;
     private String jobRole;
     private String displayName;
+    private String roleStatus;
 
 
     @DynamoDBHashKey(attributeName = "userEmail")
@@ -47,6 +48,15 @@ public class UserRole {
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
+    }
+
+    @DynamoDBAttribute(attributeName = "roleStatus")
+    public String getRoleStatus() {
+        return roleStatus;
+    }
+
+    public void setRoleStatus(String roleStatus) {
+        this.roleStatus = roleStatus;
     }
 
     @Override
