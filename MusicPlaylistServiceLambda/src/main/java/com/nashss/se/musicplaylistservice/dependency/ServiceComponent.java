@@ -7,7 +7,7 @@ import com.nashss.se.musicplaylistservice.activity.GetPlaylistSongsActivity;
 import com.nashss.se.musicplaylistservice.activity.SearchPlaylistsActivity;
 import com.nashss.se.musicplaylistservice.activity.UpdatePlaylistActivity;
 
-
+import com.nashss.se.musicplaylistservice.activity.projectActivities.*;
 import com.nashss.se.musicplaylistservice.activity.material.*;
 import com.nashss.se.musicplaylistservice.activity.taskActivities.*;
 import com.nashss.se.musicplaylistservice.activity.organizationActivities.*;
@@ -154,4 +154,33 @@ public interface ServiceComponent {
      */
     DeleteOrganizationActivity provideDeleteOrganizationActivity();
 
+    /**
+     * Provides the relevant activity.
+     * @return GetProjectActivity
+     */
+    GetProjectActivity provideGetProjectActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return GetAllProjectsActivity
+     */
+    GetAllProjectsActivity provideGetAllProjectsActivity();
+
+    /**
+     * Provides the relevant activity
+     * @return UpdateProjectActivity
+     */
+    UpdateProjectActivity provideUpdateProjectActivity();
+
+    /**
+     * Provides the relevant activity
+     * @return CreateProjectActivity
+     */
+    CreateProjectActivity provideCreateProjectActivity();
+
+    /**
+     * Provides the relevant activity
+     * @return DeleteProjectActivity
+     */
+    DeleteProjectActivity provideDeleteProjectActivity();
 }

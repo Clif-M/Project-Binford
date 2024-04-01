@@ -1,11 +1,12 @@
 package com.nashss.se.musicplaylistservice.dynamodb.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
+import com.nashss.se.musicplaylistservice.converters.TaskListConverter;
 import com.nashss.se.musicplaylistservice.converters.ZonedDateTimeConverter;
 
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @DynamoDBTable(tableName = "Projects")
 public class Project {
@@ -65,6 +66,7 @@ public class Project {
     }
 
     @DynamoDBAttribute(attributeName = "taskList")
+    @DynamoDBTypeConverted(converter = TaskListConverter.class)
     public List<Task> getTaskList() {
         return taskList;
     }
@@ -102,5 +104,27 @@ public class Project {
         this.projectDescription = projectDescription;
     }
 
-}
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
 
+        if (this == o) {
+            return true;
+        }
+
+        if (this.getClass() != o.getClass()) {
+            return false;
+        }
+
+        Project that = (Project) o;
+
+        return Objects.equals(this.orgId, that.orgId) && Objects.equals(this.projectId, that.projectId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.orgId, this.projectId);
+    }
+}

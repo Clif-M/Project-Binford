@@ -61,12 +61,12 @@ public class ProjectDaoTest {
     }
 
     @Test
-    public void getProjectsForOrg_anyProject_returnsList() {
+    public void getProjectsForOrg_anyOrg_returnsList() {
         //GIVEN
         ArgumentCaptor<DynamoDBQueryExpression<Project>> argumentCaptor = ArgumentCaptor.forClass(DynamoDBQueryExpression.class);
         doReturn(paginatedQueryList).when(mapper).query(eq(Project.class),any(DynamoDBQueryExpression.class));
         //WHEN
-        projectDao.getProjectsForOrg(testProject.getOrgId());
+        projectDao.getAllProjects(testProject.getOrgId());
         verify(mapper).query(eq(Project.class),argumentCaptor.capture());
 
         //THEN

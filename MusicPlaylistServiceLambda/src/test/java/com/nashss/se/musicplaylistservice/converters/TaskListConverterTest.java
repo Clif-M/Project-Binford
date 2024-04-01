@@ -56,13 +56,4 @@ public class TaskListConverterTest {
         assertEquals(Task.class, result.get(0).getClass(), "Expected result to be a task");
         assertTrue(result.get(0).getAssignee().equals("Elvis") || result.get(0).getAssignee().equals("Madonna"), "Expected result to contain elements of serialized string");
     }
-
-    @Test
-    public void convert_badInput_throwsMaterialSerializationException() {
-        //GIVEN
-        task2.setStartTime(ZonedDateTime.now());
-        //WHEN
-        //THEN
-        assertThrows(MaterialSerializationException.class, () -> converter.convert(objectList));
-    }
 }

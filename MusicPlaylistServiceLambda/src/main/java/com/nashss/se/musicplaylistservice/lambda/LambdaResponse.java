@@ -16,6 +16,7 @@ public class LambdaResponse extends APIGatewayProxyResponseEvent {
     private static final ObjectMapper MAPPER = new ObjectMapper();
     private static final JavaTimeModule JAVA_TIME_MODULE = new JavaTimeModule();
 
+
     private static final Logger log = LogManager.getLogger();
     private LambdaResponse(int statusCode, String body) {
         super.setStatusCode(statusCode);
@@ -35,6 +36,7 @@ public class LambdaResponse extends APIGatewayProxyResponseEvent {
     public static LambdaResponse success(Object payload) {
         MAPPER.registerModule(JAVA_TIME_MODULE);
         log.info("success");
+
         try {
             return new LambdaResponse(200, MAPPER.writeValueAsString(payload));
         } catch (JsonProcessingException e) {

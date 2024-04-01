@@ -53,7 +53,7 @@ public class ProjectDao {
      * @param orgId The orgId to look up
      * @return A list of Projects found, if any
      */
-    public List<Project> getProjectsForOrg(String orgId) {
+    public List<Project> getAllProjects(String orgId) {
         Project project = new Project();
         project.setOrgId(orgId);
         DynamoDBQueryExpression<Project> queryExpression = new DynamoDBQueryExpression<Project>()
