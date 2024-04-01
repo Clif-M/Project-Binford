@@ -684,7 +684,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /organizations/{orgId}/projects
+            Path: /projects
             Method: post
 
   GetProjectLambda:

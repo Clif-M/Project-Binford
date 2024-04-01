@@ -16,19 +16,7 @@ public class CreateProjectLambda
     public LambdaResponse handleRequest(LambdaRequest<CreateProjectRequest> input, Context context) {
         return super.runActivity(
                 () -> {
-                    CreateProjectRequest unauthenticatedRequest = input.fromBody(CreateProjectRequest.class);
-                    return input.fromPath(path ->
-                            CreateProjectRequest.builder()
-                                    .withOrgId(path.get("orgId"))
-                                    .withProjectId(path.get("projectId"))
-                                    .withName(unauthenticatedRequest.getName())
-                                    .withTaskList(unauthenticatedRequest.getTaskList())
-                                    .withCompletionPercentage(unauthenticatedRequest.getCompletionPercentage())
-                                    .withProjectStatus(unauthenticatedRequest.getProjectStatus())
-                                    .withCreationDate(unauthenticatedRequest.getCreationDate())
-                                    .withEndDate(unauthenticatedRequest.getEndDate())
-                                    .withProjectDesciption(unauthenticatedRequest.getProjectDescription())
-                                    .build());
+                    return input.fromBody(CreateProjectRequest.class);
                 },
                 (request, serviceComponent) ->
                         serviceComponent.provideCreateProjectActivity().handleRequest(request)
