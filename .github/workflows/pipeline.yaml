@@ -9,10 +9,10 @@ on:
 env:
 
   # STUDENTS: Set these environment variables 
-  API_BASE_URL: https://ry2mopotx6.execute-api.us-east-2.amazonaws.com/Prod/
+  API_BASE_URL: https://dejeyth4ff.execute-api.us-east-2.amazonaws.com/Prod
   COGNITO_DOMAIN: project-binford-team-gallium
-  COGNITO_REDIRECT_SIGNIN: https://d1g02x91f5ls5r.cloudfront.net
-  COGNITO_REDIRECT_SIGNOUT: https://d1g02x91f5ls5r.cloudfront.net
+  COGNITO_REDIRECT_SIGNIN: https://d14y6d4bjloll.cloudfront.net/
+  COGNITO_REDIRECT_SIGNOUT: https://d14y6d4bjloll.cloudfront.net/
 
   COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID }}
   COGNITO_USER_POOL_CLIENT_ID: ${{ secrets.COGNITO_USER_POOL_CLIENT_ID }}
