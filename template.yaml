@@ -216,6 +216,54 @@ Resources:
               Action: dynamodb:*
               Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/album_tracks"
 
+        - PolicyName: 'AccessMaterialTable'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:*
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/ProjectBinford_MaterialTable"
+
+        - PolicyName: 'OrganizationsTable'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:*
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/Organizations"
+
+        - PolicyName: 'AccessProjectsTable'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:*
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/Projects"
+
+        - PolicyName: 'AccessTaskTable'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:*
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/ProjectBinford_TaskTable"
+
+        - PolicyName: 'AccessTaskIndex'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:*
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/ProjectBinford_TaskTable/TasksSortByAssigneeIndex"
+
+        - PolicyName: 'AccessUserRoleTable'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:*
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/ProjectBinford_UserRoleTable"
+
   #-----------------------------------------------------
   # Lambda Functions Configuration
   #-----------------------------------------------------
@@ -878,6 +926,93 @@ Resources:
           KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
       TableName: "album_tracks"
+
+  MaterialsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "orgId"
+          AttributeType: "S"
+        - AttributeName: "materialId"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "orgId"
+          KeyType: "HASH"
+        - AttributeName: "materialId"
+          KeyType: "RANGE"
+      BillingMode: PAY_PER_REQUEST
+      TableName: "ProjectBinford_MaterialTable"
+
+  OrganizationsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "orgId"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "orgId"
+          KeyType: "HASH"
+      BillingMode: PAY_PER_REQUEST
+      TableName: "Organizations"
+
+  ProjectsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "orgId"
+          AttributeType: "S"
+        - AttributeName: "projectId"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "orgId"
+          KeyType: "HASH"
+        - AttributeName: "projectId"
+          KeyType: "RANGE"
+      BillingMode: PAY_PER_REQUEST
+      TableName: "Projects"
+
+  TaskTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "orgId"
+          AttributeType: "S"
+        - AttributeName: "taskId"
+          AttributeType: "S"
+        - AttributeName: "assignee"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "orgId"
+          KeyType: "HASH"
+        - AttributeName: "taskId"
+          KeyType: "RANGE"
+      BillingMode: PAY_PER_REQUEST
+      TableName: "ProjectBinford_TaskTable"
+      GlobalSecondaryIndexes:
+        - IndexName: "TasksSortByAssigneeIndex"
+          KeySchema:
+            - AttributeName: "orgId"
+              KeyType: "HASH"
+            - AttributeName: "assignee"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: "ALL"
+
+  UserRoleTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "userEmail"
+          AttributeType: "S"
+        - AttributeName: "orgId"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "userEmail"
+          KeyType: "HASH"
+        - AttributeName: "orgId"
+          KeyType: "RANGE"
+      BillingMode: PAY_PER_REQUEST
+      TableName: "ProjectBinford_UserRoleTable"
 
 #-----------------------------------------------------
 # The outputs defined below will be printed
