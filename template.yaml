@@ -879,6 +879,93 @@ Resources:
       BillingMode: "PAY_PER_REQUEST"
       TableName: "album_tracks"
 
+  MaterialsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "orgId"
+          AttributeType: "S"
+        - AttributeName: "materialId"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "orgId"
+          KeyType: "HASH"
+        - AttributeName: "materialId"
+          KeyType: "RANGE"
+      BillingMode: PAY_PER_REQUEST
+      TableName: "ProjectBinford_MaterialTable"
+
+  OrganizationsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "orgId"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "orgId"
+          KeyType: "HASH"
+      BillingMode: PAY_PER_REQUEST
+      TableName: "Organizations"
+
+  ProjectsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "orgId"
+          AttributeType: "S"
+        - AttributeName: "projectId"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "orgId"
+          KeyType: "HASH"
+        - AttributeName: "projectId"
+          KeyType: "RANGE"
+      BillingMode: PAY_PER_REQUEST
+      TableName: "Projects"
+
+  TaskTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "orgId"
+          AttributeType: "S"
+        - AttributeName: "taskId"
+          AttributeType: "S"
+        - AttributeName: "assignee"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "orgId"
+          KeyType: "HASH"
+        - AttributeName: "taskId"
+          KeyType: "RANGE"
+      BillingMode: PAY_PER_REQUEST
+      TableName: "ProjectBinford_TaskTable"
+      GlobalSecondaryIndexes:
+        - IndexName: "TasksSortByAssigneeIndex"
+          KeySchema:
+            - AttributeName: "orgId"
+              KeyType: "HASH"
+            - AttributeName: "assignee"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: "ALL"
+
+  UserRoleTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "userEmail"
+          AttributeType: "S"
+        - AttributeName: "orgId"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "userEmail"
+          KeyType: "HASH"
+        - AttributeName: "orgId"
+          KeyType: "RANGE"
+      BillingMode: PAY_PER_REQUEST
+      TableName: "ProjectBinford_UserRoleTable"
+
 #-----------------------------------------------------
 # The outputs defined below will be printed
 #  to the screen after a successful deploy
