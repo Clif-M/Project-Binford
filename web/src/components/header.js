@@ -25,17 +25,43 @@ export default class Header extends BindingClass {
 
         const siteTitle = this.createSiteTitle();
         const userInfo = this.createUserInfoForHeader(currentUser);
+        const navToProjectsList = this.createNavButton("Projects", 'projectsList.html');
+        const navToMaterialManagement = this.createNavButton("Inventory", 'materialManagement.html');
+        const navToUserManagement = this.createNavButton("User Management", 'userManagement.html');
+        const navToAssignedTaskList = this.createNavButton("Assigned Task", 'assignedTaskList.html');
+        const navToNewRole = this.createNavButton("New Role", 'newRole.html');
+        
 
         const header = document.getElementById('header');
         header.appendChild(siteTitle);
+        header.appendChild(navToProjectsList);
+        header.appendChild(navToAssignedTaskList);
+        header.appendChild(navToNewRole);
+        header.appendChild(navToMaterialManagement);
+        header.appendChild(navToUserManagement);
         header.appendChild(userInfo);
     }
+
+    createNavButton(text, htmlTarget) {
+        const button = document.createElement('a');
+        button.classList.add('navButton');
+        button.href = htmlTarget;
+        button.innerText = text;
+
+        button.addEventListener('click', async () => {
+            await clickHandler();
+        });
+
+        return button;
+    }
+
+
 
     createSiteTitle() {
         const homeButton = document.createElement('a');
         homeButton.classList.add('header_home');
         homeButton.href = 'index.html';
-        homeButton.innerText = 'Playlists';
+        homeButton.innerText = 'Project Binford';
 
         const siteTitle = document.createElement('div');
         siteTitle.classList.add('site-title');

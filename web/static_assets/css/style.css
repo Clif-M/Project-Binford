@@ -2,7 +2,8 @@
     /* css variables: https://developer.mozilla.org/en-US/docs/Web/CSS/var */
     --primary-color: #5D5E5E;
     --secondary-color: #ffffff;
-    --tertiary-color: #F5881F;
+    --tertiary-color: #2a3bcf;
+    /*--tertiary-color: #F5881F; */
     --error-color: #EE3A23;
 }
 
@@ -20,7 +21,7 @@
     align-items: center;
     background-color: var(--primary-color);
     color: var(--secondary-color);
-    padding: 4px 20px;
+    padding: 10px 20px;
 }
 
 .button {
@@ -34,6 +35,22 @@
   cursor: pointer;
 }
 
+
+.navButton {
+    background-color: var(--tertiary-color);
+    border: none;
+    color: var(--secondary-color);
+    padding: 6px 8px 4px 8px;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.navButton:hover {
+    background-color: #0077e6;
+}
+
 .button-group {
     display: flex;
     justify-content: space-between;
@@ -45,6 +62,12 @@
     height: 100px;
     text-decoration: none;
     color: var(--secondary-color);
+    padding: 4px 6px 2px 6px;
+    background-color:#233a50;
+}
+
+.header_home:hover {
+    background-color: #0077e6;
 }
 
 .card {
