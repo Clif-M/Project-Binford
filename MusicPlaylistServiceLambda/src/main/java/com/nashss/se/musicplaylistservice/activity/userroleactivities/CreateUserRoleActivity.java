@@ -42,7 +42,7 @@ public class CreateUserRoleActivity {
         userRole.setDisplayName(createUserRoleRequest.getDisplayName());
         userRole.setRoleStatus(createUserRoleRequest.getRoleStatus());
 
-        if (userRoleDao.loadUserRole(createUserRoleRequest.getUserEmail(), createUserRoleRequest.getOrgId()) != null) {
+        if (userRoleDao.checkIfExist(userRole)) {
             throw new UserRoleAlreadyExistException("UserRole already exist in the Database");
         }
         userRoleDao.writeUserRole(userRole);

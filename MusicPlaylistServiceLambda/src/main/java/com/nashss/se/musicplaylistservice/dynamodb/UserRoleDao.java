@@ -62,6 +62,11 @@ public class UserRoleDao {
         return mapper.query(UserRole.class, queryExpression);
     }
 
+    public boolean checkIfExist(UserRole userRole) {
+        UserRole loaded = mapper.load(UserRole.class, userRole.getUserEmail(), userRole.getOrgId());
+        return loaded != null;
+    }
+
 
     /**
      * Saves provided UserRole to DynamoDB to create or update DynamoDB record.

@@ -9,7 +9,7 @@ public class GetSingleUserRoleResult {
         this.userRole = userRole;
     }
 
-    public UserRole getOrganization() {
+    public UserRole getUserRole() {
         return userRole;
     }
 

@@ -43,7 +43,7 @@ public class CreateUserRoleRequest {
 
     @Override
     public String toString() {
-        return "CreatePlaylistRequest{" +
+        return "CreateUserRoleRequest{" +
                 "name='" + userEmail + '\'' +
                 ", orgID='" + orgId + '\'' +
                 ", cost='" + jobRole + '\'' +
