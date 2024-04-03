@@ -1,5 +1,6 @@
 
 import OrganizationClient from '../api/organizationClient';
+import UserRoleClient from '../api/userRoleClient';
 import Header from '../components/header';
 import BindingClass from "../util/bindingClass";
 import DataStore from "../util/DataStore";
@@ -49,9 +50,10 @@ class LandingPageScripts extends BindingClass {
         this.header.addHeaderToPage();
 
         this.organizationClient = new OrganizationClient();
+        this.userRoleClient = new UserRoleClient();
     }
 
-    async test(evt) {
+    async test() {
         //alert(await this.organizationClient.verifyLogin().then(result => result));
         //const{email, name} = await this.organizationClient.getIdentity().then(result => result);
         //alert(email);
@@ -60,12 +62,13 @@ class LandingPageScripts extends BindingClass {
         //    this.dataStore.setState({
         //        [SEARCH_CRITERIA_KEY]: searchCriteria,
         //        [SEARCH_RESULTS_KEY]: results,
-        const results = await this.organizationClient.getAllOrgs();
-        for(const org of results) {
-            alert(org.orgId);   
-            const orgg = await this.organizationClient.getOrganization(org.orgId);
-            alert(orgg.displayName);
-        }
+        // const results = await this.organizationClient.getAllOrgs();
+        // for(const org of results) {
+        //     alert(org.orgId);   
+        //     const orgg = await this.organizationClient.getOrganization(org.orgId);
+        //     alert(orgg.displayName);
+            const results = await this.userRoleClient.getUserRole("walsth@gmail.com", "org01");
+            //alert(results);
     }
 
     /**
