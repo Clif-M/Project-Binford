@@ -48,7 +48,8 @@ export default class OrganizationClient extends BindingClass {
 
     async verifyLogin(errorCallback) {
         try {
-             return await this.authenticator.isUserLoggedIn();
+            const isLoggedIn = await this.authenticator.isUserLoggedIn();
+             return isLoggedIn;
 
         } catch (error) {
             this.handleError(error, errorCallback)

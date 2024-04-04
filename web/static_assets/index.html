@@ -2,31 +2,30 @@
 <html>
 
 <head>
-    <script type="text/javascript" src="assets/searchPlaylists.js"></script>
+    <script type="text/javascript" src="assets/landingPageScripts.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body class="background">
     <header class="header" id="header"></header>
+    <center>
     <div class="card">
-        <h2>Search Playlists</h2>
-        <form class="card-content" id="search-playlists-form">
-            <p class="form-field">
-                <label>Search by name or tag</label>
-                <input type="text" class="validated-field" id="search-criteria" placeholder="smooth-jamz" autofocus>
-                <sub>Search is case-sensitive and tags must match exactly.</sub>
+        <h2 id="title">Welcome to [Project Binford]. Please log-in at the top right to continue.</h2>
+        <form class="card-content" id="landing-form">
+            <p>
+                <select id="userRoles" hidden = true>
+                    <option selected disabled>Where are you working today?</option>
+                </select>
             </p>
         </form>
-        <p class="button-group">
-            <a href="#" class="button" id="search-btn">Search</a>
-            <a href="createPlaylist.html" class="button">New Playlist</a>
+        <p>
+            <a href="#" class="button" id="navigate-btn" hidden = true>Get Started >></a>
+        </p>
+        <p>
+            <a href="newRole.html" class="button" id="new-role-btn" hidden = true>New Role</a>
         </p>
     </div>
-    <div class="card hidden" id='search-results-container'>
-        <h3>Results for <span id="search-criteria-display"></span></h3>
-        <div id="search-results-display">
-        </div>
-    </div>
+</center>
 </body>
 
 </html>

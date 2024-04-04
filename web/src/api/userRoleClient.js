@@ -7,7 +7,7 @@ export default class UserRoleClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getAllOrgs', 'getUserRole'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getRolesForUser', 'getUserRole', 'getDisplayRolesForUser'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -77,14 +77,32 @@ export default class UserRoleClient extends BindingClass {
      * @param errorCallback (Optional) A function to execute if the call fails.
      * @returns A list of orgs.
      */
-    async getAllOrgs(errorCallback) {
+    async getRolesForUser(userEmail, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Encountered token error trying to call UserRole endpoint.");
-            const response = await this.axiosClient.get(`organizations`, {
+            const response = await this.axiosClient.get(`userroles/${userEmail}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }});
-            return response.data.organizationList;
+            return response.data.userRoleList;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    /**
+     * Gets roles for a single user, paired with org name.
+     * @param errorCallback (Optional) A function to execute if the call fails.
+     * @returns A list of orgs.
+     */
+    async getDisplayRolesForUser(userEmail, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Encountered token error trying to call UserRole endpoint.");
+            const response = await this.axiosClient.get(`displayRoles/${userEmail}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }});
+            return response.data.userDisplayRoles;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
@@ -141,7 +159,7 @@ export default class UserRoleClient extends BindingClass {
         }
 
          /**
-             * Create a new UserRole.
+             * Update a UserRole.
              * @param userEmail
              * @param orgId
              * @param jobRole
@@ -168,6 +186,7 @@ export default class UserRoleClient extends BindingClass {
                     this.handleError(error, errorCallback)
                 }
             }
+        
 
     /**
      * Helper method to log the error and run any error functions.
