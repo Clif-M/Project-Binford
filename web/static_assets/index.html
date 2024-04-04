@@ -8,33 +8,24 @@
 
 <body class="background">
     <header class="header" id="header"></header>
+    <center>
     <div class="card">
         <h2 id="title">Welcome to [Project Binford]. Please log-in at the top right to continue.</h2>
-        <form class="card-content" id="search-playlists-form">
+        <form class="card-content" id="landing-form">
             <p>
                 <select id="userRoles" hidden = true>
-                    <option value="volvo" disabled="true">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
+                    <option selected disabled>Where are you working today?</option>
                 </select>
             </p>
-            
-            <p class="form-field">
-                <label>Search by name or tag</label>
-                <input type="text" class="validated-field" id="search-criteria" placeholder="smooth-jamz" autofocus>
-                <sub>Search is case-sensitive and tags must match exactly.</sub>
-            </p>
         </form>
-        <p class="button-group">
-            <a href="#" class="button" id="test-btn">test</a>
+        <p>
+            <a href="#" class="button" id="navigate-btn" hidden = true>Get Started >></a>
+        </p>
+        <p>
+            <a href="newRole.html" class="button" id="new-role-btn" hidden = true>New Role</a>
         </p>
     </div>
-    <div class="card hidden" id='search-results-container'>
-        <h3>Results for <span id="search-criteria-display"></span></h3>
-        <div id="search-results-display">
-        </div>
-    </div>
+</center>
 </body>
 
 </html>
