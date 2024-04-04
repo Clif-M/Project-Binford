@@ -209,4 +209,10 @@ public interface ServiceComponent {
      * @return DeleteProjectActivity
      */
     DeleteProjectActivity provideDeleteProjectActivity();
+
+    /**
+     * Provides the relevant activity
+     * @return GetDisplayRolesActivity
+     */
+    GetDisplayRolesActivity provideGetDisplayRolesActivity();
 }
