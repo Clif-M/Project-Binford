@@ -1013,6 +1013,15 @@ Resources:
           KeyType: "RANGE"
       BillingMode: PAY_PER_REQUEST
       TableName: "ProjectBinford_UserRoleTable"
+      GlobalSecondaryIndexes:
+        - IndexName: "GetUsersForOrgIndex"
+          KeySchema:
+            - AttributeName: "orgId"
+              KeyType: "HASH"
+            - AttributeName: "userEmail"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: "ALL"
 
 #-----------------------------------------------------
 # The outputs defined below will be printed
