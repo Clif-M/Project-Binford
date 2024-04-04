@@ -16,11 +16,13 @@ const EMPTY_DATASTORE_STATE = {
 The "KEY" constants will be reused a few times below.
 */
 
-const SEARCH_CRITERIA_KEY = 'search-criteria';
-const SEARCH_RESULTS_KEY = 'search-results';
+const COGNITO_NAME_KEY = 'cognito-name';
+const COGNITO_EMAIL_KEY = 'cognito-name-results';
+const USER_ROLES_KEY = 'user-roles'
 const EMPTY_DATASTORE_STATE = {
-    [SEARCH_CRITERIA_KEY]: '',
-    [SEARCH_RESULTS_KEY]: [],
+    [COGNITO_NAME_KEY]: '',
+    [COGNITO_EMAIL_KEY]: '',
+    [USER_ROLES_KEY]: [],
 };
 
 
@@ -31,12 +33,12 @@ class LandingPageScripts extends BindingClass {
     constructor() {
         super();
 
-        this.bindClassMethods(['mount', 'test'], this);
+        this.bindClassMethods(['mount', 'test', 'startupActivities'], this);
 
         // Create a enw datastore with an initial "empty" state.
         this.dataStore = new DataStore(EMPTY_DATASTORE_STATE);
         this.header = new Header(this.dataStore);
-        this.dataStore.addChangeListener(this.displaySearchResults);
+        //this.dataStore.addChangeListener(this.startupActivities);
         console.log("landingPageScripts constructor");
     }
 
@@ -51,24 +53,30 @@ class LandingPageScripts extends BindingClass {
 
         this.organizationClient = new OrganizationClient();
         this.userRoleClient = new UserRoleClient();
+        document.getElementById('title').innerText = "Welcome to [Project Binford]. Please log-in at the top right to continue.";
+        this.startupActivities();
     }
 
-    async test() {
-        //alert(await this.organizationClient.verifyLogin().then(result => result));
-        //const{email, name} = await this.organizationClient.getIdentity().then(result => result);
-        //alert(email);
-        //const results = await this.client.search(searchCriteria);
+    async startupActivities() {
+        //If user is logged in when app starts, this method will initialize page elements
+        if (await this.organizationClient.verifyLogin()) {
+            const{email, name} = await this.organizationClient.getIdentity().then(result => result);
+            this.dataStore.set([COGNITO_EMAIL_KEY], email);
+            this.dataStore.set([COGNITO_NAME_KEY], name);
+            document.getElementById('title').innerText = `Hello ${name}, please choose a role to continue.`;
+            
+            document.getElementById('userRoles').hidden = false;
+        }
+    }
 
-        //    this.dataStore.setState({
-        //        [SEARCH_CRITERIA_KEY]: searchCriteria,
-        //        [SEARCH_RESULTS_KEY]: results,
-        // const results = await this.organizationClient.getAllOrgs();
-        // for(const org of results) {
-        //     alert(org.orgId);   
-        //     const orgg = await this.organizationClient.getOrganization(org.orgId);
-        //     alert(orgg.displayName);
-            const results = await this.userRoleClient.getUserRole("walsth@gmail.com", "org01");
-            //alert(results);
+    async getRolesForUser(cognitoEmail) {
+        this.dataStore.set([USER_ROLES_KEY], await this.userRoleClient.get)
+    }
+
+
+    async test() {
+        const[cognitoEmail, cognitoName] = await this.organizationClient.getIdentity().then(result => result);
+        alert(cognitoEmail);
     }
 
     /**

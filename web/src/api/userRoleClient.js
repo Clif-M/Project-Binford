@@ -77,14 +77,14 @@ export default class UserRoleClient extends BindingClass {
      * @param errorCallback (Optional) A function to execute if the call fails.
      * @returns A list of orgs.
      */
-    async getAllOrgs(errorCallback) {
+    async getRolesForUser(errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Encountered token error trying to call UserRole endpoint.");
-            const response = await this.axiosClient.get(`organizations`, {
+            const response = await this.axiosClient.get(`userroles/${userEmail}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }});
-            return response.data.organizationList;
+            return response.data.userRoleList;
         } catch (error) {
             this.handleError(error, errorCallback)
         }

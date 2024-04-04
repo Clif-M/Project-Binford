@@ -9,8 +9,17 @@
 <body class="background">
     <header class="header" id="header"></header>
     <div class="card">
-        <h2>Search Playlists</h2>
+        <h2 id="title">Welcome to [Project Binford]. Please log-in at the top right to continue.</h2>
         <form class="card-content" id="search-playlists-form">
+            <p>
+                <select id="userRoles" hidden = true>
+                    <option value="volvo" disabled="true">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="mercedes">Mercedes</option>
+                    <option value="audi">Audi</option>
+                </select>
+            </p>
+            
             <p class="form-field">
                 <label>Search by name or tag</label>
                 <input type="text" class="validated-field" id="search-criteria" placeholder="smooth-jamz" autofocus>
@@ -18,9 +27,7 @@
             </p>
         </form>
         <p class="button-group">
-            <a href="#" class="button" id="search-btn">Search</a>
             <a href="#" class="button" id="test-btn">test</a>
-            <a href="createPlaylist.html" class="button">New Playlist</a>
         </p>
     </div>
     <div class="card hidden" id='search-results-container'>
