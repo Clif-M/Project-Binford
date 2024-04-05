@@ -2,13 +2,17 @@ package com.nashss.se.musicplaylistservice.dynamodb;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Material;
+import com.nashss.se.musicplaylistservice.dynamodb.models.Task;
 import com.nashss.se.musicplaylistservice.dynamodb.models.UserRole;
 import com.nashss.se.musicplaylistservice.exceptions.UserRoleNotFoundException;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Accesses data for a UserRole using {@link UserRole} to interact with the model in DynamoDB.
@@ -69,12 +73,32 @@ public class UserRoleDao {
 
 
     /**
-     * Saves provided UserRole to DynamoDB to create or update DynamoDB record.
+     * Retrieves all userRoles matching provided orgId.
      *
      * @param userRole The UserRole to be saved
      */
     public void writeUserRole(UserRole userRole) {
         mapper.save(userRole);
+    }
+
+    /**
+     * Retrieves all userRoles matching provided orgId
+     *
+     * If none found, returns an empty list.
+     *
+     * @param orgId The orgId to look up
+     * @return A list of UserRoles found, if any
+     */
+
+    public List<UserRole> getUsersForOrg(String orgId) {
+        Map<String, AttributeValue>  valueMap = new HashMap<>();
+        valueMap.put(":orgId", new AttributeValue(orgId));
+        DynamoDBQueryExpression<UserRole> queryExpression = new DynamoDBQueryExpression<UserRole>()
+                .withIndexName("GetUsersForOrgIndex")
+                .withConsistentRead(false)
+                .withKeyConditionExpression("orgId = :orgId")
+                .withExpressionAttributeValues(valueMap);
+        return mapper.query(UserRole.class, queryExpression);
     }
 
 

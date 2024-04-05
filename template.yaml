@@ -895,6 +895,26 @@ Resources:
             Path: /userroles/{userEmail}/organizations/{orgId}
             Method: put
 
+  GetUsersForOrgLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: MusicPlaylistServiceLambda
+      Handler: com.nashss.se.musicplaylistservice.lambda.userrolelambda.GetUsersForOrgLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        MusicPlaylistService:
+          Type: Api
+          Properties:
+            Path: /userroles/byorg/{orgId}
+            Method: get
+
   GetDisplayRolesLambda:
     Type: AWS::Serverless::Function
     Properties:
@@ -914,7 +934,6 @@ Resources:
           Properties:
             Path: /displayRoles/{userEmail}
             Method: get
-
   #-----------------------------------------------------
   # DynamoDB Configuration
   #-----------------------------------------------------

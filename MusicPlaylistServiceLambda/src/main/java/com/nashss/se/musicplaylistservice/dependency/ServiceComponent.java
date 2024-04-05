@@ -212,6 +212,12 @@ public interface ServiceComponent {
 
     /**
      * Provides the relevant activity
+     * @return GetUsersForOrgActivity
+     */
+    GetUsersForOrgActivity provideGetUsersForOrgActivity();
+
+    /**
+     * Provides the relevant activity
      * @return GetDisplayRolesActivity
      */
     GetDisplayRolesActivity provideGetDisplayRolesActivity();

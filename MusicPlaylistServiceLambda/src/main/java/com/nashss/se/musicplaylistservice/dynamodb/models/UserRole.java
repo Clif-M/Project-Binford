@@ -15,6 +15,7 @@ public class UserRole {
 
 
     @DynamoDBHashKey(attributeName = "userEmail")
+    @DynamoDBIndexRangeKey(globalSecondaryIndexName = "GetUsersForOrgIndex")
     public String getUserEmail() {
         return userEmail;
     }
@@ -24,6 +25,7 @@ public class UserRole {
     }
 
     @DynamoDBRangeKey(attributeName = "orgId")
+    @DynamoDBIndexHashKey(globalSecondaryIndexName = "GetUsersForOrgIndex")
     public String getOrgId() {
         return orgId;
     }
