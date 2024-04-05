@@ -3,6 +3,7 @@ package com.nashss.se.musicplaylistservice.activity.userroleactivities;
 import com.nashss.se.musicplaylistservice.activity.requests.userrolerequests.GetSingleUserRoleRequest;
 import com.nashss.se.musicplaylistservice.activity.results.userroleresults.GetSingleUserRoleResult;
 import com.nashss.se.musicplaylistservice.dynamodb.UserRoleDao;
+import com.nashss.se.musicplaylistservice.exceptions.InvalidAttributeValueException;
 
 import javax.inject.Inject;
 
@@ -31,6 +32,9 @@ public class GetSingleUserRoleActivity {
      * @return GetUserRoleResult object containing a single {@link com.nashss.se.musicplaylistservice.dynamodb.models.UserRole}
      */
     public GetSingleUserRoleResult handleRequest(final GetSingleUserRoleRequest getSingleUserRoleRequest) {
+        if (getSingleUserRoleRequest.getUserEmail() == null || getSingleUserRoleRequest.getOrgId() == null) {
+            throw new InvalidAttributeValueException("Error deleting loading resource: required value cannot be null");
+        }
         return GetSingleUserRoleResult.builder()
                 .withSingleUserRole(userRoleDao.loadUserRole(getSingleUserRoleRequest.getUserEmail(), getSingleUserRoleRequest.getOrgId()))
                 .build();

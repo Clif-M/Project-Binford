@@ -4,6 +4,7 @@ import com.nashss.se.musicplaylistservice.activity.requests.userrolerequests.Get
 import com.nashss.se.musicplaylistservice.activity.results.userroleresults.GetUserRolesResult;
 import com.nashss.se.musicplaylistservice.dynamodb.UserRoleDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.UserRole;
+import com.nashss.se.musicplaylistservice.exceptions.InvalidAttributeValueException;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -34,6 +35,9 @@ public class GetUserRolesActivity {
      */
 
     public GetUserRolesResult handleRequest(final GetUserRolesRequest getUserRolesRequest) {
+        if (getUserRolesRequest.getUserEmail() == null) {
+            throw new InvalidAttributeValueException("Error deleting loading resource: required value cannot be null");
+        }
         List<UserRole> taskList = new ArrayList<>();
         taskList = userRoleDao.loadUserRolesForEmail(getUserRolesRequest.getUserEmail());
         return GetUserRolesResult.builder()

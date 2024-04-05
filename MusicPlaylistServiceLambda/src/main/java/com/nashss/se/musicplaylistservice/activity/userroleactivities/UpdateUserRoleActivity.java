@@ -4,6 +4,7 @@ import com.nashss.se.musicplaylistservice.activity.requests.userrolerequests.Upd
 import com.nashss.se.musicplaylistservice.activity.results.userroleresults.UpdateUserRoleResult;
 import com.nashss.se.musicplaylistservice.dynamodb.UserRoleDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.UserRole;
+import com.nashss.se.musicplaylistservice.exceptions.InvalidAttributeValueException;
 import com.nashss.se.musicplaylistservice.exceptions.UserRoleNotFoundException;
 
 import javax.inject.Inject;
@@ -29,7 +30,7 @@ public class UpdateUserRoleActivity {
      */
     public UpdateUserRoleResult handleRequest(UpdateUserRoleRequest updateUserRoleRequest) {
         if (updateUserRoleRequest.getUserEmail() == null || updateUserRoleRequest.getOrgId() == null) {
-            throw new UserRoleNotFoundException("Error updating User Role resource: required value cannot be null");
+            throw new InvalidAttributeValueException("Error updating User Role resource: required value cannot be null");
         }
         UserRole userRole = userRoleDao.loadUserRole(updateUserRoleRequest.getUserEmail(), updateUserRoleRequest.getOrgId());
         userRole.setUserEmail(updateUserRoleRequest.getUserEmail());
