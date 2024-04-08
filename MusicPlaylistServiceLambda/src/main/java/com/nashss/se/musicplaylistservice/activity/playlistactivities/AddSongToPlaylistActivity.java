@@ -1,7 +1,7 @@
-package com.nashss.se.musicplaylistservice.activity;
+package com.nashss.se.musicplaylistservice.activity.playlistactivities;
 
-import com.nashss.se.musicplaylistservice.activity.requests.AddSongToPlaylistRequest;
-import com.nashss.se.musicplaylistservice.activity.results.AddSongToPlaylistResult;
+import com.nashss.se.musicplaylistservice.activity.requests.playlistRequests.AddSongToPlaylistRequest;
+import com.nashss.se.musicplaylistservice.activity.results.playlistResults.AddSongToPlaylistResult;
 import com.nashss.se.musicplaylistservice.converters.ModelConverter;
 import com.nashss.se.musicplaylistservice.dynamodb.AlbumTrackDao;
 import com.nashss.se.musicplaylistservice.dynamodb.PlaylistDao;

@@ -1,11 +1,11 @@
-package com.nashss.se.musicplaylistservice.activity.results;
+package com.nashss.se.musicplaylistservice.activity.results.playlistResults;
 
 import com.nashss.se.musicplaylistservice.models.PlaylistModel;
 
-public class UpdatePlaylistResult {
+public class GetPlaylistResult {
     private final PlaylistModel playlist;
 
-    private UpdatePlaylistResult(PlaylistModel playlist) {
+    private GetPlaylistResult(PlaylistModel playlist) {
         this.playlist = playlist;
     }
 
@@ -15,7 +15,7 @@ public class UpdatePlaylistResult {
 
     @Override
     public String toString() {
-        return "UpdatePlaylistResult{" +
+        return "GetPlaylistResult{" +
                 "playlist=" + playlist +
                 '}';
     }
@@ -33,8 +33,8 @@ public class UpdatePlaylistResult {
             return this;
         }
 
-        public UpdatePlaylistResult build() {
-            return new UpdatePlaylistResult(playlist);
+        public GetPlaylistResult build() {
+            return new GetPlaylistResult(playlist);
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.nashss.se.musicplaylistservice.activity.requests;
+package com.nashss.se.musicplaylistservice.activity.requests.playlistRequests;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;

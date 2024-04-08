@@ -1,4 +1,4 @@
-package com.nashss.se.musicplaylistservice.activity.results;
+package com.nashss.se.musicplaylistservice.activity.results.playlistResults;
 
 import com.nashss.se.musicplaylistservice.models.PlaylistModel;
 

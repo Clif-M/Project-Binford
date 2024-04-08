@@ -2,7 +2,7 @@ const path = require('path');
 const CopyPlugin = require("copy-webpack-plugin");
 const Dotenv = require('dotenv-webpack');
 
-// Get the name of the appropriate environment variable (`.env`) file for this build/run of the app
+// Get the name of the appropriate environment variable (` .env`) file for this build/run of the app
 const dotenvFile = process.env.API_LOCATION ? `.env.${process.env.API_LOCATION}` : '.env';
 
 module.exports = {
@@ -29,6 +29,7 @@ module.exports = {
     landingPageScripts: path.resolve(__dirname, 'src', 'pages', 'landingPageScripts.js'),
     newRoleScripts: path.resolve(__dirname, 'src', 'pages', 'newRoleScripts.js'),
     assignedTaskListScripts: path.resolve(__dirname, 'src', 'pages', 'assignedTaskListScripts.js'),
+    viewProjects: path.resolve(__dirname, 'src', 'pages', 'viewProjects.js'),
   },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),

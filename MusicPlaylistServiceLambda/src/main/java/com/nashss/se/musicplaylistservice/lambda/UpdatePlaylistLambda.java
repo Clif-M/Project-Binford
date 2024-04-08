@@ -1,7 +1,7 @@
 package com.nashss.se.musicplaylistservice.lambda;
 
-import com.nashss.se.musicplaylistservice.activity.requests.UpdatePlaylistRequest;
-import com.nashss.se.musicplaylistservice.activity.results.UpdatePlaylistResult;
+import com.nashss.se.musicplaylistservice.activity.requests.playlistRequests.UpdatePlaylistRequest;
+import com.nashss.se.musicplaylistservice.activity.results.playlistResults.UpdatePlaylistResult;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;

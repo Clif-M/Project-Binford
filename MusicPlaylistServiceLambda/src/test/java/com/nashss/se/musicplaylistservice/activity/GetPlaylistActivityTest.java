@@ -1,7 +1,8 @@
 package com.nashss.se.musicplaylistservice.activity;
 
-import com.nashss.se.musicplaylistservice.activity.requests.GetPlaylistRequest;
-import com.nashss.se.musicplaylistservice.activity.results.GetPlaylistResult;
+import com.nashss.se.musicplaylistservice.activity.playlistactivities.GetPlaylistActivity;
+import com.nashss.se.musicplaylistservice.activity.requests.playlistRequests.GetPlaylistRequest;
+import com.nashss.se.musicplaylistservice.activity.results.playlistResults.GetPlaylistResult;
 import com.nashss.se.musicplaylistservice.dynamodb.PlaylistDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Playlist;
 

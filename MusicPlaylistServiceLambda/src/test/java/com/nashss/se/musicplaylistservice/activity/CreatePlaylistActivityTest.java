@@ -1,18 +1,17 @@
 package com.nashss.se.musicplaylistservice.activity;
 
-import com.nashss.se.musicplaylistservice.activity.requests.CreatePlaylistRequest;
-import com.nashss.se.musicplaylistservice.activity.results.CreatePlaylistResult;
+import com.nashss.se.musicplaylistservice.activity.playlistactivities.CreatePlaylistActivity;
+import com.nashss.se.musicplaylistservice.activity.requests.playlistRequests.CreatePlaylistRequest;
+import com.nashss.se.musicplaylistservice.activity.results.playlistResults.CreatePlaylistResult;
 import com.nashss.se.musicplaylistservice.dynamodb.PlaylistDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Playlist;
 import com.nashss.se.musicplaylistservice.exceptions.InvalidAttributeValueException;
 
-import com.google.common.collect.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -20,7 +19,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
-import static org.mockito.MockitoAnnotations.initMocks;
 import static org.mockito.MockitoAnnotations.openMocks;
 
 public class CreatePlaylistActivityTest {

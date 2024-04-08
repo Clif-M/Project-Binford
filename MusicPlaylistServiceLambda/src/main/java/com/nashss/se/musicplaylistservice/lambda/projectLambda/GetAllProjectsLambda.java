@@ -1,8 +1,6 @@
 package com.nashss.se.musicplaylistservice.lambda.projectLambda;
 
-import com.nashss.se.musicplaylistservice.activity.requests.GetPlaylistSongsRequest;
 import com.nashss.se.musicplaylistservice.activity.requests.projectRequests.GetAllProjectsRequest;
-import com.nashss.se.musicplaylistservice.activity.results.GetPlaylistSongsResult;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;

@@ -1,7 +1,8 @@
 package com.nashss.se.musicplaylistservice.activity;
 
-import com.nashss.se.musicplaylistservice.activity.requests.GetPlaylistSongsRequest;
-import com.nashss.se.musicplaylistservice.activity.results.GetPlaylistSongsResult;
+import com.nashss.se.musicplaylistservice.activity.playlistactivities.GetPlaylistSongsActivity;
+import com.nashss.se.musicplaylistservice.activity.requests.playlistRequests.GetPlaylistSongsRequest;
+import com.nashss.se.musicplaylistservice.activity.results.playlistResults.GetPlaylistSongsResult;
 import com.nashss.se.musicplaylistservice.models.SongOrder;
 import com.nashss.se.musicplaylistservice.models.SongModel;
 import com.nashss.se.musicplaylistservice.converters.ModelConverter;

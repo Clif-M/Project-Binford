@@ -1,4 +1,4 @@
-package com.nashss.se.musicplaylistservice.activity.requests;
+package com.nashss.se.musicplaylistservice.activity.requests.playlistRequests;
 
 public class SearchPlaylistsRequest {
     private final String criteria;

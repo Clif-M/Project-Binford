@@ -1,11 +1,11 @@
 package com.nashss.se.musicplaylistservice.dependency;
 
-import com.nashss.se.musicplaylistservice.activity.AddSongToPlaylistActivity;
-import com.nashss.se.musicplaylistservice.activity.CreatePlaylistActivity;
-import com.nashss.se.musicplaylistservice.activity.GetPlaylistActivity;
-import com.nashss.se.musicplaylistservice.activity.GetPlaylistSongsActivity;
-import com.nashss.se.musicplaylistservice.activity.SearchPlaylistsActivity;
-import com.nashss.se.musicplaylistservice.activity.UpdatePlaylistActivity;
+import com.nashss.se.musicplaylistservice.activity.playlistactivities.AddSongToPlaylistActivity;
+import com.nashss.se.musicplaylistservice.activity.playlistactivities.CreatePlaylistActivity;
+import com.nashss.se.musicplaylistservice.activity.playlistactivities.GetPlaylistActivity;
+import com.nashss.se.musicplaylistservice.activity.playlistactivities.GetPlaylistSongsActivity;
+import com.nashss.se.musicplaylistservice.activity.playlistactivities.SearchPlaylistsActivity;
+import com.nashss.se.musicplaylistservice.activity.playlistactivities.UpdatePlaylistActivity;
 
 
 import com.nashss.se.musicplaylistservice.activity.userroleactivities.*;
@@ -185,6 +185,12 @@ public interface ServiceComponent {
      * @return GetProjectActivity
      */
     GetProjectActivity provideGetProjectActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return AddSongToPlaylistActivity
+     */
+    //SearchProjectsActivity provideSearchProjectsActivityActivity();
 
     /**
      * Provides the relevant activity.
