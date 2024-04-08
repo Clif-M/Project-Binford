@@ -19,8 +19,9 @@ public class CreateTaskRequest {
     private String name;
     private ZonedDateTime startTime;
     private ZonedDateTime stopTime;
+    private String taskNotes;
 
-    private CreateTaskRequest(String orgId, String assignee, Boolean completed, Integer hoursToComplete, List<Material> materialsList, String name, ZonedDateTime startTime, ZonedDateTime stopTime) {
+    private CreateTaskRequest(String orgId, String assignee, Boolean completed, Integer hoursToComplete, List<Material> materialsList, String name, ZonedDateTime startTime, ZonedDateTime stopTime, String taskNotes) {
         this.orgId = orgId;
         this.assignee = assignee;
         this.completed = completed;
@@ -29,6 +30,7 @@ public class CreateTaskRequest {
         this.name = name;
         this.startTime = startTime;
         this.stopTime = stopTime;
+        this.taskNotes = taskNotes;
     }
 
     public String getOrgId() {
@@ -49,6 +51,8 @@ public class CreateTaskRequest {
 
     public ZonedDateTime getStopTime() { return stopTime; }
 
+    public String getTaskNotes() { return taskNotes; }
+
     //CHECKSTYLE:OFF:BUILDER
     public static  Builder builder() { return new Builder(); }
 
@@ -63,6 +67,7 @@ public class CreateTaskRequest {
         private String name;
         private ZonedDateTime startTime;
         private ZonedDateTime stopTime;
+        private String taskNotes;
 
         public Builder withOrgId(String orgId) {
             this.orgId = orgId;
@@ -104,6 +109,11 @@ public class CreateTaskRequest {
             return this;
         }
 
-        public CreateTaskRequest build() { return new CreateTaskRequest(orgId, assignee, completed, hoursToComplete, materialsList, name, startTime, stopTime); }
+        public Builder withTaskNotes(String taskNotes) {
+            this.taskNotes = taskNotes;
+            return this;
+        }
+
+        public CreateTaskRequest build() { return new CreateTaskRequest(orgId, assignee, completed, hoursToComplete, materialsList, name, startTime, stopTime, taskNotes); }
     }
 }

@@ -30,6 +30,7 @@ public class UpdateTaskLambda
                                     .withName(unauthenticatedRequest.getName())
                                     .withStartTime(unauthenticatedRequest.getStartTime())
                                     .withStopTime(unauthenticatedRequest.getStopTime())
+                                    .withTaskNotes(unauthenticatedRequest.getTaskNotes())
                                     .build());
                 },
                         (request, serviceComponent) ->

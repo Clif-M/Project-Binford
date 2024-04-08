@@ -47,6 +47,7 @@ public class UpdateTaskActivity {
         updatedtask.setName(updateTaskRequest.getName());
         updatedtask.setStartTime(updateTaskRequest.getStartTime());
         updatedtask.setStopTime(updateTaskRequest.getStopTime());
+        updatedtask.setTaskNotes(updatedtask.getTaskNotes());
         taskDao.writeTask(updatedtask);
         return UpdateTaskResult.builder()
                 .withTask(updatedtask)

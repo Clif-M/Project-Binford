@@ -52,6 +52,7 @@ public class CreateTaskActivity {
         newTask.setName(createTaskRequest.getName());
         newTask.setStartTime(createTaskRequest.getStartTime());
         newTask.setStopTime(createTaskRequest.getStopTime());
+        newTask.setTaskNotes(createTaskRequest.getTaskNotes());
         taskDao.writeTask(newTask);
         return CreateTaskResult.builder()
                 .withTask(newTask)

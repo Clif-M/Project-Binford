@@ -22,8 +22,9 @@ public class UpdateTaskRequest {
     private String name;
     private ZonedDateTime startTime;
     private ZonedDateTime stopTime;
+    private String taskNotes;
 
-    private UpdateTaskRequest(String orgId, String taskId, String assignee, Boolean completed, Integer hoursToComplete, List<Material> materialsList, String name, ZonedDateTime startTime, ZonedDateTime stopTime) {
+    private UpdateTaskRequest(String orgId, String taskId, String assignee, Boolean completed, Integer hoursToComplete, List<Material> materialsList, String name, ZonedDateTime startTime, ZonedDateTime stopTime, String taskNotes) {
         this.orgId = orgId;
         this.taskId = taskId;
         this.assignee = assignee;
@@ -33,6 +34,7 @@ public class UpdateTaskRequest {
         this.name = name;
         this.startTime = startTime;
         this.stopTime = stopTime;
+        this.taskNotes = taskNotes;
     }
 
     public String getOrgId() {
@@ -56,6 +58,7 @@ public class UpdateTaskRequest {
     public ZonedDateTime getStartTime() { return startTime; }
 
     public ZonedDateTime getStopTime() { return stopTime; }
+    public String getTaskNotes() { return taskNotes; }
 
     //CHECKSTYLE:OFF:BUILDER
     public static  Builder builder() { return new Builder(); }
@@ -72,6 +75,7 @@ public class UpdateTaskRequest {
         private String name;
         private ZonedDateTime startTime;
         private ZonedDateTime stopTime;
+        private String taskNotes;
 
         public Builder withOrgId(String orgId) {
             this.orgId = orgId;
@@ -118,6 +122,11 @@ public class UpdateTaskRequest {
             return this;
         }
 
-        public UpdateTaskRequest build() { return new UpdateTaskRequest(orgId, taskId, assignee, completed, hoursToComplete, materialsList, name, startTime, stopTime); }
+        public Builder withTaskNotes(String taskNotes) {
+            this.taskNotes = taskNotes;
+            return this;
+        }
+
+        public UpdateTaskRequest build() { return new UpdateTaskRequest(orgId, taskId, assignee, completed, hoursToComplete, materialsList, name, startTime, stopTime, taskNotes); }
     }
 }

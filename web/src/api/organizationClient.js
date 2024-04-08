@@ -61,7 +61,9 @@ export default class OrganizationClient extends BindingClass {
     }
 
     async logout() {
-        this.authenticator.logout();
+        await this.authenticator.logout();
+        window.location.href = "index.html";
+        ;
     }
 
     async getTokenOrThrow(unauthenticatedErrorMessage) {

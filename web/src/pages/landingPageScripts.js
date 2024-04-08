@@ -5,17 +5,6 @@ import Header from '../components/header';
 import BindingClass from "../util/bindingClass";
 import DataStore from "../util/DataStore";
 
-/*
-The code below this comment is equivalent to...
-const EMPTY_DATASTORE_STATE = {
-    'search-criteria': '',
-    'search-results': [],
-};
-
-...but uses the "KEY" constants instead of "magic strings".
-The "KEY" constants will be reused a few times below.
-*/
-
 const COGNITO_NAME_KEY = 'cognito-name';
 const COGNITO_EMAIL_KEY = 'cognito-name-results';
 const DISPLAY_ROLES_KEY = 'display-roles-list';
@@ -35,24 +24,17 @@ class LandingPageScripts extends BindingClass {
 
         this.bindClassMethods(['mount', 'startupActivities', 'populateDropdown', 'changeButtonTarget'], this);
 
-        // Create a enw datastore with an initial "empty" state.
         this.dataStore = new DataStore(EMPTY_DATASTORE_STATE);
         this.header = new Header(this.dataStore);
-        //this.dataStore.addChangeListener(this.startupActivities);
         console.log("landingPageScripts constructor");
     }
 
-    /**
-     * Add the header to the page and load the MusicPlaylistClient.
-     */
+
     mount() {
-        // Wire up the form's 'submit' event and the button's 'click' event to the search method.
 
         this.header.addHeaderToPage();
-
         this.organizationClient = new OrganizationClient();
         this.userRoleClient = new UserRoleClient();
-        document.getElementById('title').innerText = "Welcome to [Project Binford]. Please log-in at the top right to continue.";
         this.startupActivities();
     }
 
@@ -69,6 +51,8 @@ class LandingPageScripts extends BindingClass {
             document.getElementById('navigate-btn').hidden = false;
             document.getElementById('new-role-btn').hidden = false;
             document.getElementById('userRoles').addEventListener('change', this.changeButtonTarget)
+        } else {
+            document.getElementById('title').innerText = `Welcome to [Project Binford]. Please log-in at the top right to continue.`;
         }
     }
 
@@ -97,10 +81,9 @@ class LandingPageScripts extends BindingClass {
         }
 
         if(displayRole.jobRole == 'Worker') {
-            button.setAttribute('href', 'workerTaskDetail.html?orgId=' + displayRole.orgId);
+            button.setAttribute('href', 'assignedTaskList.html?orgId=' + displayRole.orgId);
         }
 
-        //if document.getElementById
     }
 
 }

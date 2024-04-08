@@ -19,6 +19,7 @@ public class Task {
     private String name;
     private ZonedDateTime startTime;
     private ZonedDateTime stopTime;
+    private String taskNotes;
 
     @DynamoDBHashKey(attributeName = "orgId")
     @DynamoDBIndexHashKey(globalSecondaryIndexName = "TasksSortByAssigneeIndex")
@@ -104,5 +105,14 @@ public class Task {
 
     public void setMaterialsList(List<Material> materialsList) {
         this.materialsList = materialsList;
+    }
+
+    @DynamoDBAttribute(attributeName = "taskNotes")
+    public String getTaskNotes() {
+        return taskNotes;
+    }
+
+    public void setTaskNotes(String taskNotes) {
+        this.taskNotes = taskNotes;
     }
 }

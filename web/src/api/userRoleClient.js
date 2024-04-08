@@ -60,7 +60,8 @@ export default class UserRoleClient extends BindingClass {
     }
 
     async logout() {
-        this.authenticator.logout();
+        await this.authenticator.logout();
+        window.location.href = "index.html";
     }
 
     async getTokenOrThrow(unauthenticatedErrorMessage) {
@@ -127,6 +128,7 @@ export default class UserRoleClient extends BindingClass {
                 this.handleError(error, errorCallback)
             }
         }
+
     /**
          * Create a new UserRole.
          * @param userEmail

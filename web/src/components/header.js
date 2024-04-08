@@ -1,4 +1,4 @@
-import MusicPlaylistClient from '../api/musicPlaylistClient';
+import UserRoleClient from '../api/userRoleClient';
 import BindingClass from "../util/bindingClass";
 
 /**
@@ -14,7 +14,7 @@ export default class Header extends BindingClass {
         ];
         this.bindClassMethods(methodsToBind, this);
 
-        this.client = new MusicPlaylistClient();
+        this.client = new UserRoleClient();
     }
 
     /**
@@ -25,20 +25,22 @@ export default class Header extends BindingClass {
 
         const siteTitle = this.createSiteTitle();
         const userInfo = this.createUserInfoForHeader(currentUser);
-        const navToProjectsList = this.createNavButton("Projects", 'projectsList.html');
-        const navToMaterialManagement = this.createNavButton("Inventory", 'materialManagement.html');
-        const navToUserManagement = this.createNavButton("User Management", 'userManagement.html');
-        const navToAssignedTaskList = this.createNavButton("Assigned Task", 'assignedTaskList.html');
-        const navToNewRole = this.createNavButton("New Role", 'newRole.html');
+        const navToProjectsList = this.createNavButton("Projects", 'projectsList.html/?orgId=' + new URLSearchParams(window.location.search).get('orgId'));
+        const navToMaterialManagement = this.createNavButton("Inventory", 'materialManagement.html/?orgId=' + new URLSearchParams(window.location.search).get('orgId'));
+        const navToUserManagement = this.createNavButton("User Management", 'userManagement.html/?orgId=' + new URLSearchParams(window.location.search).get('orgId'));
+        const navToAssignedTaskList = this.createNavButton("Assigned Task", 'assignedTaskList.html/?orgId=' + new URLSearchParams(window.location.search).get('orgId'));
+        //const navToNewRole = this.createNavButton("New Role", 'newRole.html');
         
-
         const header = document.getElementById('header');
         header.appendChild(siteTitle);
-        header.appendChild(navToProjectsList);
-        header.appendChild(navToAssignedTaskList);
-        header.appendChild(navToNewRole);
-        header.appendChild(navToMaterialManagement);
-        header.appendChild(navToUserManagement);
+        if(window.location.pathname != "/" & window.location.pathname != "/index.html") {
+            const loggedRole = await this.client.getUserRole(currentUser.email, new URLSearchParams(window.location.search).get('orgId'))
+            if (loggedRole == 'Manager') { header.appendChild(navToProjectsList); }
+            header.appendChild(navToAssignedTaskList);
+            //header.appendChild(navToNewRole);
+            if (loggedRole == 'Manager') { header.appendChild(navToMaterialManagement); }
+            if (loggedRole == 'Manager') { header.appendChild(navToUserManagement); }
+        }
         header.appendChild(userInfo);
     }
 
