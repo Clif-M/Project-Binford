@@ -81,7 +81,11 @@ export default class ProjectClient extends BindingClass {
      */
     async getProjects(orgId, errorCallback) {
         try {
-            const response = await this.axiosClient.get(`organizations/${orgId}/projects`);
+            const token = await this.getTokenOrThrow("Only authenticated users can create projects");
+            const response = await this.axiosClient.get(`organizations/${orgId}/projects`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }});
             return response.data.projectList;
         } catch (error) {
             this.handleError(error, errorCallback)
@@ -96,7 +100,11 @@ export default class ProjectClient extends BindingClass {
      */
     async getProjectTasks(orgId, errorCallback) {
         try {
-            const response = await this.axiosClient.get(`organizations/${orgId}/tasks`);
+            const token = await this.getTokenOrThrow("Encountered token error trying to call Project endpoint.");
+            const response = await this.axiosClient.get(`organizations/${orgId}/tasks`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }});
             return response.data.songList;
         } catch (error) {
             this.handleError(error, errorCallback)
@@ -114,7 +122,7 @@ export default class ProjectClient extends BindingClass {
     async createProject(name, time, orgId, errorCallback) {
         const pending = "Pending";
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can create projects");
+            const token = await this.getTokenOrThrow("Encountered token error trying to call Project endpoint.");
             const response = await this.axiosClient.post(`projects`, {
                 orgId: orgId,
                 name: name,

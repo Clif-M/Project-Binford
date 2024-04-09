@@ -33,7 +33,7 @@ export default class Header extends BindingClass {
         
         const header = document.getElementById('header');
         header.appendChild(siteTitle);
-        if(window.location.pathname != "/" & window.location.pathname != "/index.html") {
+        if(window.location.pathname != "/" & window.location.pathname != "/index.html" & window.location.pathname != "/newRole.html") {
             var loggedRole = await this.client.getUserRole(currentUser.email, new URLSearchParams(window.location.search).get('orgId'))
             loggedRole = loggedRole.jobRole;
             if (loggedRole == 'Manager') { header.appendChild(navToProjectsList); }
