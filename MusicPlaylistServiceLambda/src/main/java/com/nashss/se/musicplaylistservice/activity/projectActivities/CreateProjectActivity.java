@@ -46,6 +46,7 @@ public class CreateProjectActivity {
         newProject.setName(createProjectRequest.getName());
         newProject.setProjectStatus(createProjectRequest.getProjectStatus());
         newProject.setTaskList(createProjectRequest.getTaskList());
+        newProject.setCompletionPercentage(createProjectRequest.getCompletionPercentage());
         newProject.setCreationDate(createProjectRequest.getCreationDate());
         newProject.setEndDate(createProjectRequest.getEndDate());
         newProject.setProjectDescription(createProjectRequest.getProjectDescription());
@@ -64,5 +65,6 @@ public class CreateProjectActivity {
             return false;
         }
     }
+
 
 }
