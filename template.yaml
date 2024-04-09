@@ -263,14 +263,10 @@ Resources:
               - Effect: Allow
                 Action: dynamodb:*
                 Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/ProjectBinford_UserRoleTable"
-
-        - PolicyName: 'AccessUserRoleIndex'
-          PolicyDocument:
-            Version: '2012-10-17'
-            Statement:
               - Effect: Allow
-                Action: dynamodb:*
-                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/ProjectBinford_UserRoleTable/GetUsersForOrgIndex"
+                Action: dynamodb:query
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/ProjectBinford_UserRoleTable/index/GetUsersForOrgIndex"
+
 
   #-----------------------------------------------------
   # Lambda Functions Configuration
