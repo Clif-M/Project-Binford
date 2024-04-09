@@ -25,10 +25,10 @@ export default class Header extends BindingClass {
 
         const siteTitle = this.createSiteTitle();
         const userInfo = this.createUserInfoForHeader(currentUser);
-        const navToProjectsList = this.createNavButton("Projects", 'projectsList.html/?orgId=' + new URLSearchParams(window.location.search).get('orgId'));
-        const navToMaterialManagement = this.createNavButton("Inventory", 'materialManagement.html/?orgId=' + new URLSearchParams(window.location.search).get('orgId'));
-        const navToUserManagement = this.createNavButton("User Management", 'userManagement.html/?orgId=' + new URLSearchParams(window.location.search).get('orgId'));
-        const navToAssignedTaskList = this.createNavButton("Assigned Task", 'assignedTaskList.html/?orgId=' + new URLSearchParams(window.location.search).get('orgId'));
+        const navToProjectsList = this.createNavButton("Projects", 'projectsList.html?orgId=' + new URLSearchParams(window.location.search).get('orgId'));
+        const navToMaterialManagement = this.createNavButton("Inventory", 'materialManagement.html?orgId=' + new URLSearchParams(window.location.search).get('orgId'));
+        const navToUserManagement = this.createNavButton("User Management", 'userManagement.html?orgId=' + new URLSearchParams(window.location.search).get('orgId'));
+        const navToAssignedTaskList = this.createNavButton("Assigned Task", 'assignedTaskList.html?orgId=' + new URLSearchParams(window.location.search).get('orgId'));
         //const navToNewRole = this.createNavButton("New Role", 'newRole.html');
         
         const header = document.getElementById('header');
