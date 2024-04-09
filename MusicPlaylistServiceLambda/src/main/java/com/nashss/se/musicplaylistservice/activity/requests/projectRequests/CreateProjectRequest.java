@@ -12,7 +12,6 @@ import java.util.List;
 @JsonDeserialize(builder = CreateProjectRequest.Builder.class)
 public class CreateProjectRequest {
     private String orgId;
-    private String projectId;
     private String name;
     private List<Task> taskList;
     private Double completionPercentage;
@@ -23,11 +22,10 @@ public class CreateProjectRequest {
     private ZonedDateTime endDate;
     private String projectDescription;
 
-    private CreateProjectRequest(String orgId, String projectId, String name, List<Task> taskList, Double completionPercentage,
+    private CreateProjectRequest(String orgId, String name, List<Task> taskList, Double completionPercentage,
                                  String projectStatus, ZonedDateTime creationDate, ZonedDateTime endDate, String projectDescription) {
 
         this.orgId = orgId;
-        this.projectId = projectId;
         this.name = name;
         this.taskList = taskList;
         this.completionPercentage = completionPercentage;
@@ -39,10 +37,6 @@ public class CreateProjectRequest {
 
     public String getOrgId() {
         return orgId;
-    }
-
-    public String getProjectId() {
-        return projectId;
     }
 
     public String getName() {
@@ -74,14 +68,13 @@ public class CreateProjectRequest {
     }
 
     //CHECKSTYLE:OFF:BUILDER
-    public static com.nashss.se.musicplaylistservice.activity.requests.projectRequests.CreateProjectRequest.Builder builder() {
-        return new com.nashss.se.musicplaylistservice.activity.requests.projectRequests.CreateProjectRequest.Builder();
+    public static Builder builder() {
+        return new Builder();
     }
 
     @JsonPOJOBuilder
     public static class Builder {
         private String orgId;
-        private String projectId;
         private String name;
         private List<Task> taskList;
         private Double completionPercentage;
@@ -92,53 +85,48 @@ public class CreateProjectRequest {
         private ZonedDateTime endDate;
         private String projectDescription;
 
-        public com.nashss.se.musicplaylistservice.activity.requests.projectRequests.CreateProjectRequest.Builder withOrgId(String orgId) {
+        public Builder withOrgId(String orgId) {
             this.orgId = orgId;
             return this;
         }
 
-        public com.nashss.se.musicplaylistservice.activity.requests.projectRequests.CreateProjectRequest.Builder withProjectId(String projectId) {
-            this.projectId = projectId;
-            return this;
-        }
-
-        public com.nashss.se.musicplaylistservice.activity.requests.projectRequests.CreateProjectRequest.Builder withName(String name) {
+        public Builder withName(String name) {
             this.name = name;
             return this;
         }
 
-        public com.nashss.se.musicplaylistservice.activity.requests.projectRequests.CreateProjectRequest.Builder withTaskList(List<Task> taskList) {
+        public Builder withTaskList(List<Task> taskList) {
             this.taskList = taskList;
             return this;
         }
 
-        public com.nashss.se.musicplaylistservice.activity.requests.projectRequests.CreateProjectRequest.Builder withCompletionPercentage(Double completionPercentage) {
+        public Builder withCompletionPercentage(Double completionPercentage) {
             this.completionPercentage = completionPercentage;
             return this;
         }
 
-        public com.nashss.se.musicplaylistservice.activity.requests.projectRequests.CreateProjectRequest.Builder withProjectStatus(String projectStatus) {
+        public Builder withProjectStatus(String projectStatus) {
             this.projectStatus = projectStatus;
             return this;
         }
 
-        public com.nashss.se.musicplaylistservice.activity.requests.projectRequests.CreateProjectRequest.Builder withCreationDate(ZonedDateTime creationDate) {
+        public Builder withCreationDate(ZonedDateTime creationDate) {
             this.creationDate = creationDate;
             return this;
         }
 
-        public com.nashss.se.musicplaylistservice.activity.requests.projectRequests.CreateProjectRequest.Builder withEndDate(ZonedDateTime endDate) {
+        public Builder withEndDate(ZonedDateTime endDate) {
             this.endDate = endDate;
             return this;
         }
 
-        public com.nashss.se.musicplaylistservice.activity.requests.projectRequests.CreateProjectRequest.Builder withProjectDesciption(String projectDescription) {
+        public Builder withProjectDescription(String projectDescription) {
             this.projectDescription = projectDescription;
             return this;
         }
 
-        public com.nashss.se.musicplaylistservice.activity.requests.projectRequests.CreateProjectRequest build() {
-            return new com.nashss.se.musicplaylistservice.activity.requests.projectRequests.CreateProjectRequest(orgId, projectId, name, taskList, completionPercentage,
+        public CreateProjectRequest build() {
+            return new CreateProjectRequest(orgId, name, taskList, completionPercentage,
                     projectStatus, creationDate, endDate, projectDescription);
         }
     }
