@@ -106,7 +106,18 @@ class UserManagementScripts extends BindingClass {
             user.displayName,
             user.roleStatus
         )
-
+        var userList = this.dataStore.get(USERLIST_KEY)
+        document.getElementById('loading').hidden = false
+        document.getElementById('greeting').hidden = true
+        document.getElementById('user-table').hidden = true
+        document.getElementById('pending').hidden = true
+        document.getElementById('pending-label').hidden = true
+        await this.startupActivities()
+        document.getElementById('loading').hidden = true
+        document.getElementById('greeting').hidden = false
+        document.getElementById('user-table').hidden = false
+        document.getElementById('pending').hidden = false
+        document.getElementById('pending-label').hidden = false
     }
 
 }
