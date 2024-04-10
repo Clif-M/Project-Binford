@@ -138,7 +138,7 @@ class TaskDetailScripts extends BindingClass {
     }
 
     async populateMaterialList() {
-        const materialList = await this.materialsClient.getMaterials(this.dataStore.get(ORG_ID_KEY))
+        const materialList = await this.materialsClient.getMultipleMaterials(this.dataStore.get(ORG_ID_KEY))
         this.dataStore.set([MATERIAL_LIST_KEY], materialList)
         const select = document.getElementById('materials');
         for (const material of materialList) {
