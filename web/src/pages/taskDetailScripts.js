@@ -37,7 +37,7 @@ const EMPTY_DATASTORE_STATE = {
 class TaskDetailScripts extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'startupActivities', 'populateTable', 'populateAssigneeList', 'populateMaterialList', 'saveButton', 'cancelButton', 'reactivateButton', 'completeButton', 'plusButton', 'minusButton', 'removeButton'], this);
+        this.bindClassMethods(['mount', 'startupActivities', 'populateTable', 'populateAssigneeList', 'populateMaterialList', 'saveButton', 'cancelButton', 'reactivateButton', 'completeButton', 'plusButton', 'minusButton', 'removeButton', 'addMaterial'], this);
         this.dataStore = new DataStore(EMPTY_DATASTORE_STATE);
         this.header = new Header(this.dataStore);
     }
@@ -84,7 +84,7 @@ class TaskDetailScripts extends BindingClass {
                 document.getElementById('hours').removeAttribute('disabled')
             }
 
-            //await this.populateMaterialList();
+            await this.populateMaterialList();
             await this.populateTable();
              var preloads = document.getElementsByClassName('preload')
              for (var i= 0; i < preloads.length; i++) {
@@ -109,7 +109,7 @@ class TaskDetailScripts extends BindingClass {
             document.getElementById('plus-btn').addEventListener('click', await this.plusButton)
             document.getElementById('minus-btn').addEventListener('click', await this.minusButton)
             document.getElementById('remove-btn').addEventListener('click', await this.removeButton)
-            // document.getElementById('start').addEventListener('change', await this.populateTable)
+            document.getElementById('materials').addEventListener('change', await this.addMaterial)
             // document.getElementById('end').addEventListener('change', await this.populateTable)
         } else {
             window.location.href = "index.html"
@@ -141,10 +141,12 @@ class TaskDetailScripts extends BindingClass {
         const materialList = await this.materialsClient.getMaterials(this.dataStore.get(ORG_ID_KEY))
         this.dataStore.set([MATERIAL_LIST_KEY], materialList)
         const select = document.getElementById('materials');
-        for (const material of materialList) {
-            var opt = document.createElement('option');
-            opt.innerText = material.name;
-            select.appendChild(opt);
+        if (materialList != null) {
+            for (const material of materialList) {
+                var opt = document.createElement('option');
+                opt.innerText = material.name;
+                select.appendChild(opt);
+            }
         }
     }
 
@@ -250,6 +252,35 @@ class TaskDetailScripts extends BindingClass {
             task["materialsList"].splice(1, index + 1)
             document.getElementById('material-table').deleteRow(index + 1)
         }
+    }
+
+    async addMaterial(){
+        const task = this.dataStore.get(TASK_OBJECT_KEY)
+        const material = this.dataStore.get(MATERIAL_LIST_KEY)[document.getElementById('materials').selectedIndex - 1]
+        const orgId = material.orgId
+        var jsonObj = {
+                    orgId: material.orgId,
+                    materialId: material.materialId,
+                    inventoryCount: 1
+                }
+        task["materialsList"].splice(task["materialsList"].length, 0, jsonObj)
+        var table = document.getElementById("material-table");
+        var tableBody = table.getElementsByTagName('tbody')[0];
+        var row = tableBody.insertRow(-1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        cell1.innerHTML = material.name;
+        cell2.innerHTML = 1;
+        var createClickHandler = function(row, dataStore) {
+        return function() {
+            for (var i = 0; i < table.rows.length; i++){
+                table.rows[i].removeAttribute('class');
+            }
+            row.setAttribute('class','selectedRow');
+            dataStore.set([SELECTED_MATERIAL_KEY], row.rowIndex - 1)
+        }}
+        row.onclick = createClickHandler(row, this.dataStore);
+        document.getElementById('materials').selectedIndex = 0
     }
 
 }
