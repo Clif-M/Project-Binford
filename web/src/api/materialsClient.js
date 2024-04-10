@@ -10,7 +10,6 @@ import Authenticator from "./authenticator";
  * https://javascript.info/mixins
   */
 export default class MaterialsClient extends BindingClass {
-
     constructor(props = {}) {
         super();
 
@@ -19,7 +18,6 @@ export default class MaterialsClient extends BindingClass {
 
         this.authenticator = new Authenticator();;
         this.props = props;
-
         axios.defaults.baseURL = process.env.API_BASE_URL;
         this.axiosClient = axios;
         this.clientLoaded();
@@ -42,7 +40,6 @@ export default class MaterialsClient extends BindingClass {
     async getIdentity(errorCallback) {
         try {
             const isLoggedIn = await this.authenticator.isUserLoggedIn();
-
             if (!isLoggedIn) {
                 return undefined;
             }
@@ -56,11 +53,9 @@ export default class MaterialsClient extends BindingClass {
     async login() {
         this.authenticator.login();
     }
-
     async logout() {
         this.authenticator.logout();
     }
-
 
     async getTokenOrThrow(unauthenticatedErrorMessage) {
         const isLoggedIn = await this.authenticator.isUserLoggedIn();
@@ -88,8 +83,6 @@ export default class MaterialsClient extends BindingClass {
                                 Authorization: `Bearer ${token}`
                             }
                         });
-          
-            return response.data.material;
 
         } catch (error) {
             this.handleError(error, errorCallback)
@@ -110,9 +103,7 @@ export default class MaterialsClient extends BindingClass {
                                     Authorization: `Bearer ${token}`
                                 }
                             });
-
                 return response.data.material;
-
             } catch (error) {
                 this.handleError(error, errorCallback)
             }
@@ -129,7 +120,6 @@ export default class MaterialsClient extends BindingClass {
                                 Authorization: `Bearer ${token}`
                             }
                         });
-
             return response.data.material;
         } catch (error) {
             this.handleError(error, errorCallback)
