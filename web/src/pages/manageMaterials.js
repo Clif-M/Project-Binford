@@ -74,7 +74,7 @@ class ManageMaterials extends BindingClass {
                             table.rows[i].removeAttribute('class');
                         }
                         row.setAttribute('class','selectedRow')
-                        document.getElementById('view-btn').setAttribute('href', 'workerMaterialListDetail?orgId=' + new URLSearchParams(window.location.search).get('orgId'));
+                        //document.getElementById('view-btn').setAttribute('href', 'workerMaterialListDetail?orgId=' + new URLSearchParams(window.location.search).get('orgId'));
                     };
                 };
                 row.onclick = createClickHandler(row);
@@ -89,7 +89,7 @@ class ManageMaterials extends BindingClass {
             return;
         } else {
            await this.editMaterial();
-           alert("Material added!");
+           alert("Material updated!");
         }
     }
 
@@ -115,7 +115,7 @@ class ManageMaterials extends BindingClass {
             return;
         } else {
            await this.addMaterial();
-           alert("Material updated!");
+           alert("Material added!");
         }
     }
 

@@ -65,6 +65,7 @@ class UserManagementScripts extends BindingClass {
         var oldTableBody = table.getElementsByTagName('tbody')[0];
         var newTableBody = document.createElement('tbody');
         var userList = this.dataStore.get(USERLIST_KEY);
+        if(userList != null) {
         for(const user of userList) {
              if (user.roleStatus=="Pending" || document.getElementById('pending').checked==false) {
                  var row = newTableBody.insertRow(-1);
@@ -90,7 +91,7 @@ class UserManagementScripts extends BindingClass {
                      };
                  };
                  row.onclick = createClickHandler(row, this.dataStore);
-             }}
+             }}}
          oldTableBody.parentNode.replaceChild(newTableBody, oldTableBody);
     }
 
