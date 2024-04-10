@@ -31,6 +31,7 @@ module.exports = {
     assignedTaskListScripts: path.resolve(__dirname, 'src', 'pages', 'assignedTaskListScripts.js'),
     viewProjects: path.resolve(__dirname, 'src', 'pages', 'viewProjects.js'),
     taskDetailScripts: path.resolve(__dirname, 'src', 'pages', 'taskDetailScripts.js'),
+    manageMaterials: path.resolve(__dirname, 'src', 'pages', 'manageMaterials.js'),
   },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),
