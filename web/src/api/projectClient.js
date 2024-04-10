@@ -94,7 +94,12 @@ export default class ProjectClient extends BindingClass {
 
     async getProject(orgId, projectId, errorCallback) {
         try {
-            const response = await this.axiosClient.get(`organizations/${orgId}/projects/${projectId}`);
+            const token = await this.getTokenOrThrow("Only authenticated users can create projects");
+            const response = await this.axiosClient.get(`organizations/${orgId}/projects/${projectId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }});
+            
             return response.data.project;
         } catch (error) {
             this.handleError(error, errorCallback)
