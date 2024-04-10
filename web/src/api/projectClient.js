@@ -15,7 +15,7 @@ export default class ProjectClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getProjects', 'getProjectTasks', 'createProject'];
+        const methodsToBind = ['updateProject', 'getProject', 'clientLoaded', 'getIdentity', 'login', 'logout', 'getProjects', 'createProject'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -92,24 +92,20 @@ export default class ProjectClient extends BindingClass {
         }
     }
 
-    /**
-     * Get the songs on a given playlist by the playlist's identifier.
-     * @param id Unique identifier for a playlist
-     * @param errorCallback (Optional) A function to execute if the call fails.
-     * @returns The list of songs on a playlist.
-     */
-    async getProjectTasks(orgId, errorCallback) {
+    async getProject(orgId, projectId, errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Encountered token error trying to call Project endpoint.");
-            const response = await this.axiosClient.get(`organizations/${orgId}/tasks`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }});
-            return response.data.songList;
+            const token = await this.getTokenOrThrow("Only authenticated users can create projects");
+            const response = await this.axiosClient.get(`organizations/${orgId}/projects/${projectId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }});
+            
+            return response.data.project;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
     }
+
 
     /**
      * Create a new project owned by the current users organization.
@@ -146,42 +142,29 @@ export default class ProjectClient extends BindingClass {
      * @param trackNumber The track number of the song on the album.
      * @returns The list of songs on a playlist.
      */
-    async addTaskToPlaylist(id, asin, trackNumber, errorCallback) {
+    async updateProject(completionPercentage, creationDate, endDate, name, orgId, projectDescription, projectId, projectStatus, taskList, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can add a song to a playlist.");
-            const response = await this.axiosClient.post(`playlists/${id}/songs`, {
-                id: id,
-                asin: asin,
-                trackNumber: trackNumber
-            }, {
-                headers: {
+            const response = await this.axiosClient.put(`organizations/${orgId}/projects/${projectId}`, {
+                completionPercentage: completionPercentage,
+                creationDate: creationDate,
+                endDate: endDate,
+                name: name,
+                orgId: orgId,
+                projectDescription: projectDescription,
+                projectStatus: projectStatus,
+                taskList: taskList,
+                projectId: projectId
+            }, 
+                {headers: {
                     Authorization: `Bearer ${token}`
-                }
-            });
+            }});
             return response.data.songList;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
     }
 
-    /**
-     * Search for a soong.
-     * @param criteria A string containing search criteria to pass to the API.
-     * @returns The playlists that match the search criteria.
-     */
-    async search(criteria, errorCallback) {
-        try {
-            const queryParams = new URLSearchParams({ q: criteria })
-            const queryString = queryParams.toString();
-
-            const response = await this.axiosClient.get(`organizations/${queryString}/projects`);
-
-            return response.data.playlists;
-        } catch (error) {
-            this.handleError(error, errorCallback)
-        }
-
-    }
 
     /**
      * Helper method to log the error and run any error functions.

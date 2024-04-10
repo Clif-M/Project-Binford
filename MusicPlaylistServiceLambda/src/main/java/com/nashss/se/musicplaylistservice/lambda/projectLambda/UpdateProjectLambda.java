@@ -29,7 +29,7 @@ public class UpdateProjectLambda
                                     .withProjectStatus(unauthenticatedRequest.getProjectStatus())
                                     .withCreationDate(unauthenticatedRequest.getCreationDate())
                                     .withEndDate(unauthenticatedRequest.getEndDate())
-                                    .withProjectDesciption(unauthenticatedRequest.getProjectDescription())
+                                    .withProjectDescription(unauthenticatedRequest.getProjectDescription())
                                     .build());
                 },
                 (request, serviceComponent) ->

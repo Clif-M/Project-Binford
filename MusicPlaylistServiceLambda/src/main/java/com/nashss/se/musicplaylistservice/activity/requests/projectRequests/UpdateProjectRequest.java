@@ -127,7 +127,7 @@ public class UpdateProjectRequest {
             return this;
         }
 
-        public Builder withProjectDesciption(String projectDescription) {
+        public Builder withProjectDescription(String projectDescription) {
             this.projectDescription = projectDescription;
             return this;
         }

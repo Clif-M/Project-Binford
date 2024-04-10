@@ -41,7 +41,7 @@ public class GetAllProjectsActivity {
             project.setCompletionPercentage(this.calculateCompletion(project.getTaskList()));
         }
         return GetAllProjectsResult.builder()
-                .withProjectList(projectDao.getAllProjects(getAllProjectsRequest.getOrgId()))
+                .withProjectList(projectList)
                 .build();
     }
 
