@@ -88,8 +88,10 @@ export default class MaterialsClient extends BindingClass {
                                 Authorization: `Bearer ${token}`
                             }
                         });
+
           
             return response.data.material;
+
 
         } catch (error) {
             this.handleError(error, errorCallback)
@@ -113,6 +115,7 @@ export default class MaterialsClient extends BindingClass {
 
                 return response.data.material;
 
+
             } catch (error) {
                 this.handleError(error, errorCallback)
             }
@@ -129,7 +132,6 @@ export default class MaterialsClient extends BindingClass {
                                 Authorization: `Bearer ${token}`
                             }
                         });
-
             return response.data.material;
         } catch (error) {
             this.handleError(error, errorCallback)

@@ -35,6 +35,17 @@
   cursor: pointer;
 }
 
+.task-delete-button {
+    background-color: var(--error-color);
+    border: none;
+    color: var(--secondary-color);
+    padding: 6px 8px 4px 8px;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
 
 .navButton {
     background-color: var(--tertiary-color);
