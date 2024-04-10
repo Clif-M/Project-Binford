@@ -133,19 +133,18 @@ export default class TaskClient extends BindingClass {
         }
     }
 
-    async updateTask(orgId, email, assignee, completed, hoursToComplete, materialsList, name, startTime, stopTime, errorCallback) {
+    async updateTask(orgId, taskId, assignee, completed, hoursToComplete, materialsList, name, startTime, stopTime, taskNotes, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Encountered token error trying to call Task endpoint.");
-            const response = await this.axiosClient.post(`organizations/${orgId}/tasks`, {
-                orgId: orgId,
-                email: email,
+            const response = await this.axiosClient.put(`organizations/${orgId}/tasks/${taskId}`, {
                 assignee: assignee,
                 completed: completed,
                 hoursToComplete: hoursToComplete,
                 materialsList: materialsList,
                 name: name,
                 startTime: startTime,
-                stopTime: stopTime
+                stopTime: stopTime,
+                taskNotes: taskNotes,
             },
                 {headers: {
                     Authorization: `Bearer ${token}`

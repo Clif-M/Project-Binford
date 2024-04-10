@@ -88,7 +88,7 @@ class AssignedTaskListScripts extends BindingClass {
                             table.rows[i].removeAttribute('class');
                         }
                         row.setAttribute('class','selectedRow')
-                        document.getElementById('view-btn').setAttribute('href', 'workerTaskListDetail?orgId=' + new URLSearchParams(window.location.search).get('orgId') + "&taskId=" + task.taskId);
+                        document.getElementById('view-btn').setAttribute('href', 'taskDetail.html?orgId=' + new URLSearchParams(window.location.search).get('orgId') + "&taskId=" + task.taskId);
                     };
                 };
                 row.onclick = createClickHandler(row);

@@ -247,14 +247,9 @@ Resources:
               - Effect: Allow
                 Action: dynamodb:*
                 Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/ProjectBinford_TaskTable"
-
-        - PolicyName: 'AccessTaskIndex'
-          PolicyDocument:
-            Version: '2012-10-17'
-            Statement:
               - Effect: Allow
-                Action: dynamodb:*
-                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/ProjectBinford_TaskTable/TasksSortByAssigneeIndex"
+                Action: dynamodb:query
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/ProjectBinford_TaskTable/index/TasksSortByAssigneeIndex"
 
         - PolicyName: 'AccessUserRoleTable'
           PolicyDocument:
@@ -263,6 +258,10 @@ Resources:
               - Effect: Allow
                 Action: dynamodb:*
                 Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/ProjectBinford_UserRoleTable"
+              - Effect: Allow
+                Action: dynamodb:query
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/ProjectBinford_UserRoleTable/index/GetUsersForOrgIndex"
+
 
   #-----------------------------------------------------
   # Lambda Functions Configuration

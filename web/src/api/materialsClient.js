@@ -1,7 +1,6 @@
 import axios from "axios";
 import BindingClass from "../util/bindingClass";
 import Authenticator from "./authenticator";
-
 /**
  * Client to call the MusicPlaylistService.
  *
@@ -62,6 +61,7 @@ export default class MaterialsClient extends BindingClass {
         this.authenticator.logout();
     }
 
+
     async getTokenOrThrow(unauthenticatedErrorMessage) {
         const isLoggedIn = await this.authenticator.isUserLoggedIn();
         if (!isLoggedIn) {
@@ -72,7 +72,6 @@ export default class MaterialsClient extends BindingClass {
     }
     //---------------------------------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------------------------
-
 
     async editMaterial(orgId, materialId, cost, inventoryCount, isExpendable, name, errorCallback) {
         try {
@@ -89,7 +88,9 @@ export default class MaterialsClient extends BindingClass {
                                 Authorization: `Bearer ${token}`
                             }
                         });
+          
             return response.data.material;
+
         } catch (error) {
             this.handleError(error, errorCallback)
         }
@@ -109,7 +110,9 @@ export default class MaterialsClient extends BindingClass {
                                     Authorization: `Bearer ${token}`
                                 }
                             });
+
                 return response.data.material;
+
             } catch (error) {
                 this.handleError(error, errorCallback)
             }
@@ -126,6 +129,7 @@ export default class MaterialsClient extends BindingClass {
                                 Authorization: `Bearer ${token}`
                             }
                         });
+
             return response.data.material;
         } catch (error) {
             this.handleError(error, errorCallback)
@@ -140,6 +144,7 @@ export default class MaterialsClient extends BindingClass {
                     Authorization: `Bearer ${token}`
                 }});
             return response.data.material;
+
         } catch (error) {
             this.handleError(error, errorCallback)
         }
