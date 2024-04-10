@@ -109,8 +109,6 @@ class TaskDetailScripts extends BindingClass {
             document.getElementById('plus-btn').addEventListener('click', await this.plusButton)
             document.getElementById('minus-btn').addEventListener('click', await this.minusButton)
             document.getElementById('remove-btn').addEventListener('click', await this.removeButton)
-            // document.getElementById('start').addEventListener('change', await this.populateTable)
-            // document.getElementById('end').addEventListener('change', await this.populateTable)
         } else {
             window.location.href = "index.html"
         }

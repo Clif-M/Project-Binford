@@ -188,7 +188,7 @@ export default class UserRoleClient extends BindingClass {
             async updateUserRole(userEmail, orgId, jobRole, displayName, roleStatus, errorCallback) {
                 try {
                     const token = await this.getTokenOrThrow("Encountered token error trying to call UserRole endpoint.");
-                    const response = await this.axiosClient.post(`userroles/${userEmail}/organizations/${orgId}`, {
+                    const response = await this.axiosClient.put(`userroles/${userEmail}/organizations/${orgId}`, {
                         jobRole: jobRole,
                         displayName: displayName,
                         roleStatus: roleStatus
