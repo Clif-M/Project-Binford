@@ -1,4 +1,5 @@
 
+import TaskClient from '../api/taskClient';
 import UserRoleClient from '../api/userRoleClient';
 import Header from '../components/header';
 import BindingClass from "../util/bindingClass";
@@ -42,61 +43,58 @@ class AssignedTaskListScripts extends BindingClass {
             const{email, name} = await this.userRoleClient.getIdentity().then(result => result);
             this.dataStore.set([COGNITO_EMAIL_KEY], email);
             this.dataStore.set([COGNITO_NAME_KEY], name);
-            // this.dataStore.set([TASKLIST_KEY], await this.taskClient.getTasksForAssignee(orgId, email));
+            this.dataStore.set([TASKLIST_KEY], await this.taskClient.getTasksForAssignee(orgId, email));
 
-            // await this.populateTable();
-            // var preloads = document.getElementsByClassName('preload')
-            // for (var i= 0; i < preloads.length; i++) {
-            //     preloads[i].hidden=false
-            // }
-            document.getElementById('loading').hidden=true;
+            await this.populateTable();
             var preloads = document.getElementsByClassName('preload')
             for (var i= 0; i < preloads.length; i++) {
                 preloads[i].hidden=false
             }
-            // document.getElementById('completed').addEventListener('change', await this.populateTable)
-            // document.getElementById('start').addEventListener('change', await this.populateTable)
-            // document.getElementById('end').addEventListener('change', await this.populateTable)
+            document.getElementById('loading').hidden=true;
+            document.getElementById('view-btn').hidden=false;
+            document.getElementById('completed').addEventListener('change', await this.populateTable)
+            document.getElementById('start').addEventListener('change', await this.populateTable)
+            document.getElementById('end').addEventListener('change', await this.populateTable)
         } else {
             window.location.href = "index.html"
         }
     }
 
     async populateTable() {
-        // var table = document.getElementById("task-table");
-        // var oldTableBody = table.getElementsByTagName('tbody')[0];
-        // var newTableBody = document.createElement('tbody');
-        // var taskList = this.dataStore.get(TASKLIST_KEY);
-        // for(const task of taskList) {
-        //     const date = new Date(task.startTime *1000)
-        //     if (
-        //         (task.completed==false || document.getElementById('completed').checked==true) &&
-        //         (date >= new Date(document.getElementById('start').value)) &&
-        //         (date <= new Date(document.getElementById('end').value))
-        //     ) {
+        var table = document.getElementById("task-table");
+        var oldTableBody = table.getElementsByTagName('tbody')[0];
+        var newTableBody = document.createElement('tbody');
+        var taskList = this.dataStore.get(TASKLIST_KEY);
+        for(const task of taskList) {
+            const date = new Date(task.startTime *1000)
+            if (
+                (task.completed==false || document.getElementById('completed').checked==true) &&
+                (date >= new Date(document.getElementById('start').value)) &&
+                (date <= new Date(document.getElementById('end').value))
+            ) {
 
-        //         var row = newTableBody.insertRow(0);
-        //         var cell1 = row.insertCell(0); 
-        //         var cell2 = row.insertCell(1);
-        //         var cell3 = row.insertCell(2);
-        //         var cell4 = row.insertCell(3);
-        //         cell1.innerHTML = task.name;
-        //         cell2.innerHTML = task.hoursToComplete;
-        //         cell3.innerHTML = date.toDateString();
-        //         cell4.innerHTML = task.completed;
-        //         var createClickHandler = function(row) {
-        //             return function() {
-        //                 for (var i = 0; i < table.rows.length; i++){
-        //                     table.rows[i].removeAttribute('class');
-        //                 }
-        //                 row.setAttribute('class','selectedRow')
-        //                 document.getElementById('view-btn').setAttribute('href', 'taskDetail.html?orgId=' + new URLSearchParams(window.location.search).get('orgId') + "&taskId=" + task.taskId);
-        //             };
-        //         };
-        //         row.onclick = createClickHandler(row);
-        //     }
-        // }
-        // oldTableBody.parentNode.replaceChild(newTableBody, oldTableBody);
+                var row = newTableBody.insertRow(0);
+                var cell1 = row.insertCell(0); 
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                var cell4 = row.insertCell(3);
+                cell1.innerHTML = task.name;
+                cell2.innerHTML = task.hoursToComplete;
+                cell3.innerHTML = date.toDateString();
+                cell4.innerHTML = task.completed;
+                var createClickHandler = function(row) {
+                    return function() {
+                        for (var i = 0; i < table.rows.length; i++){
+                            table.rows[i].removeAttribute('class');
+                        }
+                        row.setAttribute('class','selectedRow')
+                        document.getElementById('view-btn').setAttribute('href', 'taskDetail.html?orgId=' + new URLSearchParams(window.location.search).get('orgId') + "&taskId=" + task.taskId);
+                    };
+                };
+                row.onclick = createClickHandler(row);
+            }
+        }
+        oldTableBody.parentNode.replaceChild(newTableBody, oldTableBody);
     }
 
 }

@@ -6,12 +6,12 @@ import DataStore from "../util/DataStore";
 const COGNITO_NAME_KEY = 'cognito-name';
 const COGNITO_EMAIL_KEY = 'cognito-name-results';
 const ORG_ID_KEY = 'organization-id-key';
-const TASKLIST_KEY = 'tasklist-key';
+const USERLIST_KEY = 'userlist-key';
 const EMPTY_DATASTORE_STATE = {
     [COGNITO_NAME_KEY]: '',
     [COGNITO_EMAIL_KEY]: '',
     [ORG_ID_KEY]: '',
-    [TASKLIST_KEY]: []
+    [USERLIST_KEY]: []
 };
 
 
@@ -40,7 +40,7 @@ class UserManagementScripts extends BindingClass {
             const{email, name} = await this.userRoleClient.getIdentity().then(result => result);
             this.dataStore.set([COGNITO_EMAIL_KEY], email);
             this.dataStore.set([COGNITO_NAME_KEY], name);
-
+            this.dataStore.set([USERLIST_KEY], await this.userRoleClient.getUsersForOrg(orgId))
 
             //await this.populateTable();
             var preloads = document.getElementsByClassName('preload')
@@ -58,9 +58,9 @@ class UserManagementScripts extends BindingClass {
     }
 
     async populateTable() {
-        // var table = document.getElementById("task-table");
-        // var oldTableBody = table.getElementsByTagName('tbody')[0];
-        // var newTableBody = document.createElement('tbody');
+        var table = document.getElementById("user-table");
+        var oldTableBody = table.getElementsByTagName('tbody')[0];
+        var newTableBody = document.createElement('tbody');
         // var taskList = this.dataStore.get(TASKLIST_KEY);
         // for(const task of taskList) {
         //     const date = new Date(task.startTime *1000)
