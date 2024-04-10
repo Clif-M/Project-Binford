@@ -64,7 +64,7 @@ class TaskDetailScripts extends BindingClass {
             this.dataStore.set([COGNITO_NAME_KEY], name);
             const task = await this.taskClient.getSingleTask(orgId, taskId);
             this.dataStore.set([TASK_OBJECT_KEY], task);
-            //await this.populateAssigneeList();
+            await this.populateAssigneeList();
             document.getElementById('name').value = task.name;
             if(task.completed == true) {
                 document.getElementById('completed').value = "Yes"
@@ -84,7 +84,7 @@ class TaskDetailScripts extends BindingClass {
                 document.getElementById('hours').removeAttribute('disabled')
             }
 
-            await this.populateMaterialList();
+            //await this.populateMaterialList();
             await this.populateTable();
              var preloads = document.getElementsByClassName('preload')
              for (var i= 0; i < preloads.length; i++) {
