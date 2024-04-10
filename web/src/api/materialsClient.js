@@ -71,7 +71,7 @@ export default class MaterialsClient extends BindingClass {
     async getMaterials(orgId, errorCallback) {
         try {
             const response = await this.axiosClient.get(`organizations/${orgId}/materials`);
-            return response.data.projectList;
+            return response.data.materials;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
