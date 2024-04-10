@@ -129,6 +129,20 @@ export default class UserRoleClient extends BindingClass {
             }
         }
 
+        async getUsersForOrg(orgId, errorCallback) {
+            try {
+                const token = await this.getTokenOrThrow("Encountered token error trying to call UserRole endpoint.");
+                const response = await this.axiosClient.get(`/userroles/byorg/${orgId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }});
+                return response.data.userRoles;
+            } catch (error) {
+                this.handleError(error, errorCallback)
+            }
+        }
+
+
     /**
          * Create a new UserRole.
          * @param userEmail
