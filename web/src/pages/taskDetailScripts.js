@@ -110,7 +110,6 @@ class TaskDetailScripts extends BindingClass {
             document.getElementById('minus-btn').addEventListener('click', await this.minusButton)
             document.getElementById('remove-btn').addEventListener('click', await this.removeButton)
             document.getElementById('materials').addEventListener('change', await this.addMaterial)
-            // document.getElementById('end').addEventListener('change', await this.populateTable)
         } else {
             window.location.href = "index.html"
         }
@@ -155,6 +154,7 @@ class TaskDetailScripts extends BindingClass {
         var oldTableBody = table.getElementsByTagName('tbody')[0];
         var newTableBody = document.createElement('tbody');
         var materialList = this.dataStore.get(TASK_OBJECT_KEY).materialsList;
+        if(materialList != null) {
         for(const material of materialList) {
                 const fullMaterial = await this.materialsClient.getSingleMaterial(material.orgId, material.materialId)
                 if (fullMaterial != null) {
@@ -174,7 +174,7 @@ class TaskDetailScripts extends BindingClass {
                 row.onclick = createClickHandler(row, this.dataStore);
                 
             }
-        }
+        }}
         oldTableBody.parentNode.replaceChild(newTableBody, oldTableBody);
     }
 
