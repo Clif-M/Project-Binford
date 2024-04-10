@@ -15,6 +15,7 @@ const MATERIAL_LIST_KEY = 'material-list-key';
 const TASK_OBJECT_KEY = 'task-object-key';
 const ASSIGNEE_LIST_KEY = 'assignee-list-key';
 const USER_OBJECT_KEY = 'user-object-key';
+const FILTERED_ASSIGNEE_KEY = 'filtered-assignee-key'
 const EMPTY_DATASTORE_STATE = {
     [COGNITO_NAME_KEY]: '',
     [COGNITO_EMAIL_KEY]: '',
@@ -25,6 +26,7 @@ const EMPTY_DATASTORE_STATE = {
     [TASK_OBJECT_KEY]: '',
     [ASSIGNEE_LIST_KEY]: [],
     [USER_OBJECT_KEY]: '',
+    [FILTERED_ASSIGNEE_KEY]: [],
 };
 
 
@@ -32,7 +34,7 @@ const EMPTY_DATASTORE_STATE = {
 class TaskDetailScripts extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'startupActivities', 'populateTable'], this);
+        this.bindClassMethods(['mount', 'startupActivities', 'populateTable', 'populateAssigneeList', 'saveButton', 'cancelButton', 'reactivateButton', 'completeButton'], this);
         this.dataStore = new DataStore(EMPTY_DATASTORE_STATE);
         this.header = new Header(this.dataStore);
     }
@@ -93,7 +95,10 @@ class TaskDetailScripts extends BindingClass {
              } else {
                 document.getElementById('complete-btn').hidden=false;
              }
-            document.getElementById('save-btn').addEventListener('click', await this.populateTable)
+            document.getElementById('save-btn').addEventListener('click', await this.saveButton)
+            document.getElementById('cancel-btn').addEventListener('click', await this.cancelButton)
+            document.getElementById('uncomplete-btn').addEventListener('click', await this.reactivateButton)
+            document.getElementById('complete-btn').addEventListener('click', await this.completeButton)
             // document.getElementById('start').addEventListener('change', await this.populateTable)
             // document.getElementById('end').addEventListener('change', await this.populateTable)
         } else {
@@ -102,10 +107,11 @@ class TaskDetailScripts extends BindingClass {
     }
 
     async populateAssigneeList() {
-        var userList = await this.userRoleClient.getUsersForOrg(this.dataStore.get([ORG_ID_KEY]));
-        userList = userList.filter((user) => user.roleStatus == 'Active')
+        var assigneeList = await this.userRoleClient.getUsersForOrg(this.dataStore.get([ORG_ID_KEY]));
+        assigneeList = assigneeList.filter((user) => user.roleStatus == 'Active')
+        this.dataStore.set([FILTERED_ASSIGNEE_KEY], assigneeList)
         const select = document.getElementById('users');
-        for (const user of userList) {
+        for (const user of assigneeList) {
             var opt = document.createElement('option');
             opt.innerText = user.displayName.concat(" ~ ", user.jobRole);
             select.appendChild(opt);
@@ -113,8 +119,8 @@ class TaskDetailScripts extends BindingClass {
         const assignee = this.dataStore.get([TASK_OBJECT_KEY]).assignee;
         if (assignee !== null) {
 
-            for (let i=0; i < userList.length; i++) {
-                if (userList[i].userEmail === assignee) {
+            for (let i=0; i < assigneeList.length; i++) {
+                if (assigneeList[i].userEmail === assignee) {
                     select.selectedIndex = i + 1;
                 }
             }
@@ -147,6 +153,50 @@ class TaskDetailScripts extends BindingClass {
         oldTableBody.parentNode.replaceChild(newTableBody, oldTableBody);
     }
 
+    async saveButton() {
+        const task = this.dataStore.get(TASK_OBJECT_KEY)
+        task.name = document.getElementById("name").value
+        task.hoursToComplete = document.getElementById('hours').value
+        task.taskNotes = document.getElementById('taskNotes').value
+        if (document.getElementById('users').selectedIndex == 0) {
+            task.assignee = null
+        } else {
+            task.assignee = this.dataStore.get([FILTERED_ASSIGNEE_KEY])[document.getElementById('users').selectedIndex - 1].userEmail
+        }
+        await this.taskClient.updateTask(
+                task.orgId,
+                task.taskId,
+                task.assignee,
+                task.completed,
+                task.hoursToComplete,
+                task.materialsList,
+                task.name,
+                task.startTime,
+                task.stopTime,
+                task.TaskNotes
+        )
+        this.cancelButton()    
+    }
+
+    async cancelButton() {
+        var outboundPath = ""
+        if(this.dataStore.get(PROJECT_ID_KEY) == null) {
+            outboundPath = "assignedTaskList.html?orgId=" + this.dataStore.get(ORG_ID_KEY)
+        } else {
+            outboundPath = "projectDetail.html?orgId=" + this.dataStore.get(ORG_ID_KEY) + "&projectId=" + this.dataStore.get(PROJECT_ID_KEY)
+        }
+        window.location.href = outboundPath
+    }
+
+    async reactivateButton() {
+        this.dataStore.get(TASK_OBJECT_KEY).completed = false
+        this.saveButton()
+    }
+
+    async completeButton() {
+        this.dataStore.get(TASK_OBJECT_KEY).completed = true
+        this.saveButton()
+    }
 }
 
 
