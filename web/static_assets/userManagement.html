@@ -2,15 +2,61 @@
 <html>
 
 <head>
-    <script type="text/javascript" src="assets/searchPlaylists.js"></script>
+    <script type="text/javascript" src="assets/userManagementScripts.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body class="background">
-    <header class="header" id="header"></header>
-    <div class="card">
-        <h2>User Management</h2>
-    </div>
+    <center>
+        <header class="header" id="header"></header>
+        <div class="card">
+            <h2 id = "loading">Loading, please wait...</h2>
+            <h2 id = "greeting" hidden = true class="preload">User Management</h2>
+            <p>
+                <table id = "user-table" hidden = true class="preload">
+                    <thead>
+                        <tr>
+                        <th>Email Address</th>
+                        <th>Display Name</th>
+                        <th>Job Role</th>
+                        <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+            </p>
+        </div>
+    </center>
+    <center>
+        <header class="header" id="header"></header>
+        <div class="card">
+            <h2>User Detail</h2>
+            <p>
+                <label for="email" class="preload" hidden = true>Name:</label>
+                <input type="text" id="email" class="preload" disabled hidden = true>
+            </p>
+            <p>
+                <label for="name" class="preload" hidden = true>Name:</label>
+                <input type="text" id="name" class="preload" disabled hidden = true>
+            </p>
+            <p>
+                <label for="jobRole" class="preload" hidden = true>Job Role:</label>
+                <select id="jobRole" class="preload" hidden = true>
+                    <option id = "Manager">Manager</option>
+                    <option id = "Worker">Worker</option>
+                </select>
+            </p>
+            <p>
+                <label for="status" class="preload" hidden = true>Status:</label>
+                <select id="status" class="preload" hidden = true>
+                    <option id = "Active">Active</option>
+                    <option id = "Pending">Pending</option>
+                    <option id = "Inactive">Inactive</option>
+                </select>
+            </p>
+        </div>
+    </center>
 </body>
 
 </html>
