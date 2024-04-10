@@ -30,6 +30,7 @@ module.exports = {
     newRoleScripts: path.resolve(__dirname, 'src', 'pages', 'newRoleScripts.js'),
     assignedTaskListScripts: path.resolve(__dirname, 'src', 'pages', 'assignedTaskListScripts.js'),
     viewProjects: path.resolve(__dirname, 'src', 'pages', 'viewProjects.js'),
+    projectDetailScript: path.resolve(__dirname, 'src', 'pages', 'projectDetailScript.js'),
     taskDetailScripts: path.resolve(__dirname, 'src', 'pages', 'taskDetailScripts.js'),
   },
   output: {

@@ -27,7 +27,6 @@ class ViewProjects extends BindingClass {
     * Add the header to the page and load the ProjectClient.
     */
     mount() {
-        //document.getElementById('search-projects-form').addEventListener('submit', this.search);
         document.getElementById('search-btn').addEventListener('click', this.search);
         document.getElementById('create-btn').addEventListener('click', this.createProject);
 
@@ -83,8 +82,9 @@ class ViewProjects extends BindingClass {
 
         var date = new Date(d);
         date = date.getTime()
-       
+
         var dateString = date.toString().substr(0, 10);
+        console.log(dateString);
         if (name && orgId && date) {
             const results = await createClient.createProject(name, dateString, orgId).then(response => {
                 console.log(response);
@@ -155,56 +155,29 @@ class ViewProjects extends BindingClass {
 
         var start = null;
         var end = null;
-
-        if (document.getElementById('start').value != "") {
-            start = this.convertDateToUTC(document.getElementById('start').value);
-            console.log("start = " + start);
-        }
-
-        if (document.getElementById('end').value != "") {
-            end = this.convertDateToUTC(document.getElementById('end').value);
-            console.log("end = " + end);
-        }
-
+        if (document.getElementById('start').value != "") { start = this.convertDateToUTC(document.getElementById('start').value); }
+        if (document.getElementById('end').value != "") { end = this.convertDateToUTC(document.getElementById('end').value); }
         const status = document.getElementById('status').value;
-
         let html = '<table><tr><th>Project Name</th><th>Completion Percentage</th> <th>Status</th><th>CreationDate</th><th>EndDate</th><th>Description</th></tr>';
         for (const res of searchResults) {
             var projectDate = this.convertToUTC(res.creationDate);
             var endDate = res.endDate;
             if (endDate != null) {
                 endDate = this.convertToUTC(res.endDate);
-            } else {endDate = ''}
+            } else { endDate = '' }
             console.log("PROJECTDATE = " + projectDate);
-            if (
-                (res.projectStatus != status)
-            ) {
-                continue;
-            }
-            if (
-                (start != null)
-            ) {
-                if (this.getEpochMillis(start) > this.getEpochMillis(projectDate)) {
-                    continue;
-                }
-            }
-
-            if (
-                (end != null)
-            ) {
-                if (this.getEpochMillis(end) < this.getEpochMillis(projectDate)) {
-                    continue;
-                }
-            }
+            if ((res.projectStatus != status)) { continue; }
+            if ((start != null)) { if (this.getEpochMillis(start) > this.getEpochMillis(projectDate)) { continue; } }
+            if ((end != null)) { if (this.getEpochMillis(end) < this.getEpochMillis(projectDate)) { continue; } }
             html += `
         <tr>
             <td>
-                <a href="projectDetail.html?orgid=${res.id}">${res.name}</a>
+                <a href="projectDetail.html?orgId=${res.orgId}&projectId=${res.projectId}">${res.name}</a>
             </td>
-            <td>${res.completionPercentage}</td>
+            <td>${Math.floor((res.completionPercentage) * 100)+ "\%"}</td>
             <td>${res.projectStatus}</td>
-            <td>${this.convertToUTC(res.creationDate)}</td>
-            <td>${endDate}</td>
+            <td>${this.convertToUTC(res.creationDate).toString().substr(0, 16)}</td>
+            <td>${endDate.toString().substr(0, 16)}</td>
             <td>${res.projectDescription}</td>
         </tr>`;
         }
