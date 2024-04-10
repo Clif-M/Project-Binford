@@ -282,7 +282,6 @@ class TaskDetailScripts extends BindingClass {
         row.onclick = createClickHandler(row, this.dataStore);
         document.getElementById('materials').selectedIndex = 0
     }
-        
 
 }
 
