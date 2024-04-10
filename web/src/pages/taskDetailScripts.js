@@ -5,6 +5,7 @@ import MaterialsClient from '../api/materialsClient';
 import Header from '../components/header';
 import BindingClass from "../util/bindingClass";
 import DataStore from "../util/DataStore";
+import { AxiosError } from 'axios';
 
 const COGNITO_NAME_KEY = 'cognito-name';
 const COGNITO_EMAIL_KEY = 'cognito-name-results';
@@ -15,7 +16,8 @@ const MATERIAL_LIST_KEY = 'material-list-key';
 const TASK_OBJECT_KEY = 'task-object-key';
 const ASSIGNEE_LIST_KEY = 'assignee-list-key';
 const USER_OBJECT_KEY = 'user-object-key';
-const FILTERED_ASSIGNEE_KEY = 'filtered-assignee-key'
+const FILTERED_ASSIGNEE_KEY = 'filtered-assignee-key';
+const SELECTED_MATERIAL_KEY = 'selected-material-key';
 const EMPTY_DATASTORE_STATE = {
     [COGNITO_NAME_KEY]: '',
     [COGNITO_EMAIL_KEY]: '',
@@ -27,6 +29,7 @@ const EMPTY_DATASTORE_STATE = {
     [ASSIGNEE_LIST_KEY]: [],
     [USER_OBJECT_KEY]: '',
     [FILTERED_ASSIGNEE_KEY]: [],
+    [SELECTED_MATERIAL_KEY]: -1,
 };
 
 
@@ -34,7 +37,7 @@ const EMPTY_DATASTORE_STATE = {
 class TaskDetailScripts extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'startupActivities', 'populateTable', 'populateAssigneeList', 'saveButton', 'cancelButton', 'reactivateButton', 'completeButton'], this);
+        this.bindClassMethods(['mount', 'startupActivities', 'populateTable', 'populateAssigneeList', 'populateMaterialList', 'saveButton', 'cancelButton', 'reactivateButton', 'completeButton', 'plusButton', 'minusButton', 'removeButton'], this);
         this.dataStore = new DataStore(EMPTY_DATASTORE_STATE);
         this.header = new Header(this.dataStore);
     }
@@ -61,7 +64,7 @@ class TaskDetailScripts extends BindingClass {
             this.dataStore.set([COGNITO_NAME_KEY], name);
             const task = await this.taskClient.getSingleTask(orgId, taskId);
             this.dataStore.set([TASK_OBJECT_KEY], task);
-            await this.populateAssigneeList();
+            //await this.populateAssigneeList();
             document.getElementById('name').value = task.name;
             if(task.completed == true) {
                 document.getElementById('completed').value = "Yes"
@@ -81,6 +84,7 @@ class TaskDetailScripts extends BindingClass {
                 document.getElementById('hours').removeAttribute('disabled')
             }
 
+            await this.populateMaterialList();
             await this.populateTable();
              var preloads = document.getElementsByClassName('preload')
              for (var i= 0; i < preloads.length; i++) {
@@ -89,6 +93,9 @@ class TaskDetailScripts extends BindingClass {
              document.getElementById('loading').hidden=true;
              document.getElementById('save-btn').hidden=false;
              document.getElementById('cancel-btn').hidden=false;
+             document.getElementById('remove-btn').hidden=false;
+             document.getElementById('plus-btn').hidden=false;
+             document.getElementById('minus-btn').hidden=false;
 
              if(task.completed) {
                 document.getElementById('uncomplete-btn').hidden=false;
@@ -99,6 +106,9 @@ class TaskDetailScripts extends BindingClass {
             document.getElementById('cancel-btn').addEventListener('click', await this.cancelButton)
             document.getElementById('uncomplete-btn').addEventListener('click', await this.reactivateButton)
             document.getElementById('complete-btn').addEventListener('click', await this.completeButton)
+            document.getElementById('plus-btn').addEventListener('click', await this.plusButton)
+            document.getElementById('minus-btn').addEventListener('click', await this.minusButton)
+            document.getElementById('remove-btn').addEventListener('click', await this.removeButton)
             // document.getElementById('start').addEventListener('change', await this.populateTable)
             // document.getElementById('end').addEventListener('change', await this.populateTable)
         } else {
@@ -127,6 +137,17 @@ class TaskDetailScripts extends BindingClass {
         }
     }
 
+    async populateMaterialList() {
+        const materialList = await this.materialsClient.getMaterials(this.dataStore.get(ORG_ID_KEY))
+        this.dataStore.set([MATERIAL_LIST_KEY], materialList)
+        const select = document.getElementById('materials');
+        for (const material of materialList) {
+            var opt = document.createElement('option');
+            opt.innerText = material.name;
+            select.appendChild(opt);
+        }
+    }
+
     async populateTable() {
         var table = document.getElementById("material-table");
         var oldTableBody = table.getElementsByTagName('tbody')[0];
@@ -135,19 +156,21 @@ class TaskDetailScripts extends BindingClass {
         for(const material of materialList) {
                 const fullMaterial = await this.materialsClient.getSingleMaterial(material.orgId, material.materialId)
                 if (fullMaterial != null) {
-                    var row = newTableBody.insertRow(0);
+                    var row = newTableBody.insertRow(-1);
                     var cell1 = row.insertCell(0);
                     var cell2 = row.insertCell(1);
                     cell1.innerHTML = fullMaterial.name;
                     cell2.innerHTML = material.inventoryCount;
-                    var createClickHandler = function(row) {
+                    var createClickHandler = function(row, dataStore) {
                     return function() {
                         for (var i = 0; i < table.rows.length; i++){
                             table.rows[i].removeAttribute('class');
                         }
-                        row.setAttribute('class','selectedRow')
+                        row.setAttribute('class','selectedRow');
+                        dataStore.set([SELECTED_MATERIAL_KEY], row.rowIndex - 1)
                     }};
-                row.onclick = createClickHandler(row);
+                row.onclick = createClickHandler(row, this.dataStore);
+                
             }
         }
         oldTableBody.parentNode.replaceChild(newTableBody, oldTableBody);
@@ -197,6 +220,38 @@ class TaskDetailScripts extends BindingClass {
         this.dataStore.get(TASK_OBJECT_KEY).completed = true
         this.saveButton()
     }
+
+    async plusButton() {
+        if(this.dataStore.get(SELECTED_MATERIAL_KEY) >= 0) {
+            const task = this.dataStore.get(TASK_OBJECT_KEY)
+            const index = this.dataStore.get(SELECTED_MATERIAL_KEY)
+            var count = task["materialsList"][index]["inventoryCount"]
+            count ++
+            task["materialsList"][index]["inventoryCount"] = count
+            document.getElementById('material-table').rows[index + 1].cells[1].innerHTML = count
+        }
+    }
+
+    async minusButton() {
+        if(this.dataStore.get(SELECTED_MATERIAL_KEY) >= 0) {
+            const task = this.dataStore.get(TASK_OBJECT_KEY)
+            const index = this.dataStore.get(SELECTED_MATERIAL_KEY)
+            var count = task["materialsList"][index]["inventoryCount"]
+            count --
+            task["materialsList"][index]["inventoryCount"] = Math.max(count, 0)
+            document.getElementById('material-table').rows[index + 1].cells[1].innerHTML = Math.max(count, 0)
+        }
+    }
+
+    async removeButton() {
+        if(this.dataStore.get(SELECTED_MATERIAL_KEY) >= 0) {
+            const task = this.dataStore.get(TASK_OBJECT_KEY)
+            const index = this.dataStore.get(SELECTED_MATERIAL_KEY)
+            task["materialsList"].splice(1, index + 1)
+            document.getElementById('material-table').deleteRow(index + 1)
+        }
+    }
+
 }
 
 
