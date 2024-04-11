@@ -40,6 +40,8 @@ class ProjectDetailScript extends BindingClass {
 
     async createTask() {
         //alert("createTask called")
+        var startTime = this.dataStore.get(SEARCH_RESULTS_KEY);
+        startTime = startTime.creationDate;
         var taskClient = new TaskClient();
         const orgId = new URLSearchParams(window.location.search).get('orgId');
         const assignee = null;
@@ -47,7 +49,6 @@ class ProjectDetailScript extends BindingClass {
         const hoursToComplete = null;
         const materialsList = null;
         const name = document.getElementById('new-task-name').value;
-        const startTime = null;
         var results = null;
         if (orgId && name) {
 
