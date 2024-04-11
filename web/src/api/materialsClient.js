@@ -121,7 +121,7 @@ export default class MaterialsClient extends BindingClass {
             }
         }
 
-    async deleteMaterial(orgId, materialId, cost, inventoryCount, isExpendable, name, errorCallback) {
+    async deleteMaterial(orgId, materialId, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can edit materials");
             const response = await this.axiosClient.delete(`materials/${materialId}/organizations/${orgId}`, {
