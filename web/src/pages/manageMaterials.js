@@ -100,8 +100,8 @@ class ManageMaterials extends BindingClass {
         const inventoryCount = document.getElementById('material-count').value;
         var isExpendable = null;
         if (document.getElementById('isExpendable').value === 'Yes') {
-        isExpendable = false} else if (document.getElementById('isExpendable').value === 'No') {
-        isExpendable = true};
+        isExpendable = true} else if (document.getElementById('isExpendable').value === 'No') {
+        isExpendable = false};
         const name = document.getElementById('material-name').value;
 
             await this.materialsClient.editMaterial(orgId, materialId, cost, inventoryCount, isExpendable, name)
