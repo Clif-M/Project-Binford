@@ -44,7 +44,8 @@ class LandingPageScripts extends BindingClass {
             const{email, name} = await this.organizationClient.getIdentity().then(result => result);
             this.dataStore.set([COGNITO_EMAIL_KEY], email);
             this.dataStore.set([COGNITO_NAME_KEY], name);
-            const displayRoles = await this.userRoleClient.getDisplayRolesForUser(email);
+            var displayRoles = await this.userRoleClient.getDisplayRolesForUser(email);
+            displayRoles = displayRoles.filter((role) => role.roleStatus != 'Inactive')
             this.dataStore.set([DISPLAY_ROLES_KEY], displayRoles);
             this.populateDropdown(displayRoles);
             document.getElementById('title').innerText = `Hello ${name}. Let's get to work!`;
@@ -58,31 +59,34 @@ class LandingPageScripts extends BindingClass {
 
     populateDropdown(displayRoles) {
         const select = document.getElementById('userRoles');
-
         for (const displayRole of displayRoles) {
-            if (displayRole.roleStatus != "Inactive") {
                 var opt = document.createElement('option');
                 opt.innerText = displayRole.orgDisplayName.concat(" ~ ", displayRole.jobRole);
+                opt.setAttribute('id', displayRole.orgDisplayName)
                 if (displayRole.roleStatus == 'Pending') {
                     opt.innerText = displayRole.orgDisplayName.concat(" ~ ", displayRole.jobRole).concat("  PENDING APPROVAL");
                     opt.disabled = 'disabled';
                 }
                 select.appendChild(opt);
-            }
         }
         document.getElementById('userRoles').hidden = false;
     }
 
     changeButtonTarget() {
+        var selectedOrg = document.getElementById('userRoles').options[document.getElementById('userRoles').selectedIndex].id
         const button = document.getElementById('navigate-btn');
-        const displayRole = this.dataStore.get(DISPLAY_ROLES_KEY)[document.getElementById('userRoles').selectedIndex -1];
-        if(displayRole.jobRole == 'Manager') {
-            button.setAttribute('href', 'projectsList.html?orgId=' + displayRole.orgId);
+        for (var role of this.dataStore.get(DISPLAY_ROLES_KEY)) {
+            if (role.orgDisplayName === selectedOrg) {
+                if(role.jobRole == 'Manager') {
+                    button.setAttribute('href', 'projectsList.html?orgId=' + role.orgId);
+                }
+        
+                if(role.jobRole == 'Worker') {
+                    button.setAttribute('href', 'assignedTaskList.html?orgId=' + role.orgId);
+                }
+            }
         }
-
-        if(displayRole.jobRole == 'Worker') {
-            button.setAttribute('href', 'assignedTaskList.html?orgId=' + displayRole.orgId);
-        }
+        
 
     }
 
