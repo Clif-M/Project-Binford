@@ -4,7 +4,6 @@ import com.nashss.se.musicplaylistservice.activity.requests.taskRequests.GetTask
 import com.nashss.se.musicplaylistservice.activity.results.taskResults.GetTaskResult;
 import com.nashss.se.musicplaylistservice.dynamodb.TaskDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Task;
-import com.nashss.se.musicplaylistservice.models.PlaylistModel;
 
 import javax.inject.Inject;
 
