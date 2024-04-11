@@ -75,9 +75,15 @@ class TaskDetailScripts extends BindingClass {
             if(task.startTime != null) { document.getElementById('startTime').value = (new Date(task.startTime *1000)).toDateString() }
             if(task.endTime != null) { document.getElementById('endTime').value = (new Date(task.endTime *1000)).toDateString() }
             document.getElementById('taskNotes').value = task.taskNotes
-
+            if (task.startTime != null) {
+                const startDate = new Date(task.startTime *1000)
+                document.getElementById('startTime').value = startDate.toDateString()
+            }
+            if (task.stopTime != null) {
+                const endDate = new Date(task.stopTime *1000)
+                document.getElementById('endTime').value = endDate.toDateString()
+            }
             this.dataStore.set([USER_OBJECT_KEY], await this.userRoleClient.getUserRole(email, orgId))
-
             if (this.dataStore.get(USER_OBJECT_KEY).jobRole == "Manager") {
                 document.getElementById('name').removeAttribute('disabled')
                 document.getElementById('users').removeAttribute('disabled')
@@ -215,11 +221,20 @@ class TaskDetailScripts extends BindingClass {
 
     async reactivateButton() {
         this.dataStore.get(TASK_OBJECT_KEY).completed = false
+        this.dataStore.get(TASK_OBJECT_KEY).stopTime = ''
         this.saveButton()
     }
 
     async completeButton() {
         this.dataStore.get(TASK_OBJECT_KEY).completed = true
+        var time = Date.now();
+        var d = new Date(0);
+        d.setUTCSeconds(time)
+        d = d.toUTCString()
+        var date = new Date(d);
+        date = date.getTime()
+        date.toString().substr(0, 10)
+        this.dataStore.get(TASK_OBJECT_KEY).stopTime = date.toString().substr(0, 10)
         this.saveButton()
     }
 
@@ -263,7 +278,15 @@ class TaskDetailScripts extends BindingClass {
                     materialId: material.materialId,
                     inventoryCount: 1
                 }
-        task["materialsList"].splice(task["materialsList"].length, 0, jsonObj)
+        if (task["materialsList"] != null) {
+            task["materialsList"].splice(task["materialsList"].length, 0, jsonObj)
+        } else {
+            //  var matListObj = {
+            //      materialsList: []
+            //  }
+             task["materialsList"] = new Array()
+             task["materialsList"].push(jsonObj)
+        }
         var table = document.getElementById("material-table");
         var tableBody = table.getElementsByTagName('tbody')[0];
         var row = tableBody.insertRow(-1);
